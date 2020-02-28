@@ -1,0 +1,79 @@
+{
+  "project_info": {
+    "project_number": "558881935841",
+    "firebase_url": "https://aplicacion-bdcf5.firebaseio.com",
+    "project_id": "aplicacion-bdcf5",
+    "storage_bucket": "aplicacion-bdcf5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558881935841:android:d64c6565a30357de",
+        "android_client_info": {
+          "package_name": "com.hegaro.gopay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558881935841-f602dsnkghhj12c1chso7rc2na4595en.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hegaro.gopay",
+            "certificate_hash": "625d5301ee4cb98a40ad4164e7432f44296a0a9b"
+          }
+        },
+        {
+          "client_id": "558881935841-57k51dla62953o416k4t3dfv0cdvv1ed.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hegaro.gopay",
+            "certificate_hash": "6db10d16c3cbcfd902cda5e11993014e7ca1909d"
+          }
+        },
+        {
+          "client_id": "558881935841-175mostf79ue77k5ebhjejt7onp1k6mp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hegaro.gopay",
+            "certificate_hash": "b92dcee37bd36d8647fd2cdcdf568bfa4bf7e62b"
+          }
+        },
+        {
+          "client_id": "558881935841-e5skrmugt81aibhrgbh570vpg8v847vf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hegaro.gopay",
+            "certificate_hash": "e9018d4e841256dbd576e863eb81566e023d5c04"
+          }
+        },
+        {
+          "client_id": "558881935841-6u48b95j7jehggjblbt7kdm93srvchce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5e1B9P-AfDDxVGfMbVvf6ePL8ngsnVL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558881935841-6u48b95j7jehggjblbt7kdm93srvchce.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "558881935841-beh95bud7cmlkjn2bbrpc279nqva3nc6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hegaro.gopay"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

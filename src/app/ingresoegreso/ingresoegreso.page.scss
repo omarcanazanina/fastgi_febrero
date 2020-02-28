@@ -1,0 +1,52 @@
+
+.letra{
+   color:white;
+}
+.ir{
+    position:absolute; top: 30%;left: 90%;
+    color: #ADAEAF;
+}
+
+.icono{
+    font-size: 150%;
+}
+.ingreso{
+    color: #088A08;
+}
+.egreso{
+    color: #045FB4;
+}
+.balance{
+    color: #000000;
+}
+.caja{
+    font-size: 350%;
+    text-align: center;
+}
+.nombre{
+    font-size: 200%;
+    text-align: center;
+}
+.botones{
+    text-align: center;
+}
+
+.segment,.card{
+    position: absolute;
+    width: 90%;
+} 
+.card{
+    margin: -1%;
+    top : 9%;
+    z-index: 2;
+    position: fixed;
+    width: 95%;
+    background-color: #ffffff;
+}
+.tex{
+    text-align: center;
+    font-size: 130%;
+    color: #000000;
+}
+
+

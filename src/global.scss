@@ -1,0 +1,72 @@
+// http://ionicframework.com/docs/theming/
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+@import "theme/theme.scss";
+.my-custom-modal-css .modal-wrapper {
+    height: 99%;
+    top: 1%;
+    position: absolute; 
+    display: block;  
+ }
+ .detalleenviocobro .modal-wrapper{
+   height: 80%;
+   top: 10%;
+   width:92%;
+   position: absolute; 
+   display: block;  
+ }
+
+.detalleingresoegreso .modal-wrapper{
+  height: 80%;
+  top: 10%;
+  width:92%;
+  position: absolute; 
+  display: block; 
+}
+.test-class > img{
+  width: 100% !important
+}
+
+.detalleegreso .modal-wrapper{
+  height: 80%;
+  top: 10%;
+  width:92%;
+  position: absolute; 
+  display: block;  
+}
+
+.enviadatos .modal-wrapper {
+  height: 80%;
+  top: 10%;
+  width:92%;
+  position: absolute; 
+  display: block;  
+}
+.envio .modal-wrapper {
+  height: 80%;
+  top: 10%;
+  width:92%; 
+  
+}
+.confirmarpago .modal-wrapper{
+  height: 91%;
+  top: 6%;
+  width:95%;
+  position: absolute; 
+  display: block;  
+}
+//.confirmacion1 .modal-wrapper{
+//  height: 91%;
+//  top: 6%;
+//  width:95%;
+//  position: absolute; 
+//  display: block;  
+//}

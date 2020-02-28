@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-item lines="none" color="primary">
+      <ion-icon name="people" class="icono"></ion-icon>
+      <ion-title>
+          Cobros
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let usu of actualizado" [routerLink]="['/pagarenviocobro',usu.id]">
+      <p>{{usu.nombre}} </p>
+
+    </ion-item>
+  </ion-list>
+
+
+ 
+</ion-content>
+<!-- REALIZA PAGO
+<ion-list>
+    <ion-item *ngFor="let usu of actualizado" [routerLink]="['/pagarenviocobro',usu.id]">
+      <p>{{usu.nombre}} </p>
+      <ion-badge slot="end">1</ion-badge>
+    </ion-item>
+    <ion-item *ngFor="let usu of enviocobros3" [routerLink]="['/pagarenviocobro',usu.id]">
+      <p>{{usu.nombre}} </p>
+      <ion-badge slot="end">1</ion-badge>
+    </ion-item>
+  </ion-list>
+-->
+<!--
+ <div padding>
+    <ion-segment [(ngModel)]="cobros">
+      <ion-segment-button value="enviados">
+        Enviados
+      </ion-segment-button>
+      <ion-segment-button value="recibidos">
+        Recibidos
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="cobros">
+    <ion-list *ngSwitchCase="'enviados'">
+      <ion-list *ngFor="let usu of enviocobros">
+        <ion-item *ngIf="usu.estado == '0'" (click)="opendetalle(usu)">
+          <p>{{usu.nombre}} {{usu.monto}}</p>
+          <ion-badge slot="end">1</ion-badge>
+        </ion-item>
+        <ion-item *ngIf="usu.estado == '1'" class="pagado" (click)="opendetalle(usu)">
+          <p>{{usu.nombre}} {{usu.monto}} (ya pagado)</p>
+          <ion-badge slot="end">1</ion-badge>
+        </ion-item>
+      </ion-list>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'recibidos'">
+      <ion-list *ngFor="let usu of actualizado">
+        <ion-item [routerLink]="['/pagarenviocobro',usu.id]">
+          <p>{{usu.nombre}}</p>
+          <ion-badge slot="end">1</ion-badge>
+        </ion-item>
+      </ion-list>
+    </ion-list>
+  </div>
+-->

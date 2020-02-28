@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Ingrese datos
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/ingresoegreso"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label position="floating">Banco</ion-label>
+    <ion-select [(ngModel)]="banco" okText="Aceptar" cancelText="Cancelar" placeholder="Selección obligatoria"
+      (ionChange)="onSelectChange(banco)" required>
+      <ion-select-option value="fie">FIE</ion-select-option>
+      <ion-select-option value="desarrolloproductivo">BDP</ion-select-option>
+      <ion-select-option value="bisa">BISA</ion-select-option>
+      <ion-select-option value="creditodebolivia">BCP</ion-select-option>
+      <ion-select-option value="economico">ECONÓMICO</ion-select-option>
+      <ion-select-option value="fassil">FASSIL</ion-select-option>
+      <ion-select-option value="fortaleza">FORTALEZA</ion-select-option>
+      <ion-select-option value="ganadero">GANADERO</ion-select-option>
+      <ion-select-option value="mercantilsantacruz">MERCANTIL SCZ</ion-select-option>
+      <ion-select-option value="nacionaldebolivia">BNB</ion-select-option>
+      <ion-select-option value="prodem">PRODEM</ion-select-option>
+      <ion-select-option value="solidario">SOLIDARIO</ion-select-option>
+      <ion-select-option value="union">UNIÓN</ion-select-option>
+      <ion-select-option value="comunidad">COMUNIDAD</ion-select-option>
+      <ion-select-option value="ecofuturo">ECOFUTURO</ion-select-option>
+    </ion-select>
+  </ion-item> <br>
+
+  <div *ngIf="contador == 1 " class="div">
+    <ion-label>Nro. de cuenta</ion-label><br>
+    <input class="input2" [textMask]="{mask: mask4}" [(ngModel)]="miModelo.solonumero" type="text"
+      placeholder="falta información" required />
+  </div>
+
+  <div *ngIf="contador == 10 " class="div">
+    <ion-label>Nro. de cuenta</ion-label><br>
+    <input class="input2" [textMask]="{mask: mask}" [(ngModel)]="miModelo.solonumero" type="text"
+      placeholder="0000 0000 00" required />
+  </div>
+
+  <div *ngIf="contador == 11 " class="div">
+    <ion-label>Nro. de cuenta</ion-label><br>
+    <input class="input2" [textMask]="{mask: mask1}" [(ngModel)]="miModelo.solonumero" type="text"
+      placeholder="0000 0000 000" required />
+  </div>
+
+  <div *ngIf="contador == 13 " class="div">
+    <ion-label>Nro. de cuenta</ion-label><br>
+    <input class="input2" [textMask]="{mask: mask2}" [(ngModel)]="miModelo.solonumero" type="text"
+      placeholder="0000 0000 0000 0" required />
+  </div>
+  <div *ngIf="contador == 14 " class="div">
+    <ion-label>Nro. de cuenta</ion-label><br>
+    <input class="input2" [textMask]="{mask: mask3}" [(ngModel)]="miModelo.solonumero" type="text"
+      placeholder="0000 0000 0000 00" required />
+  </div>
+  <br>
+  <ion-item>
+    <ion-label position="floating">C.I.</ion-label>
+    <ion-input type="text" [(ngModel)]="ci" name="ci" placeholder="0000000" #solonumero="ngModel" minlength="7"
+      maxlength="10" required digits></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Nombre completo</ion-label>
+    <ion-input class="nombre" type="text" [(ngModel)]="nombre" name="nombre" placeholder="Juan Perez Lopez" minlength=5
+      required>
+    </ion-input>
+  </ion-item>
+
+  <ion-button class="boton" size="large" expand="full" (click)="guardarcuenta()">Retirar Bs. {{dato}}</ion-button>
+  <p class="texto">Se guardara los datos de la cuenta</p>
+
+</ion-content>

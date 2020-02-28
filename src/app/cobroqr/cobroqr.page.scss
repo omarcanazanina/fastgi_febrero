@@ -1,0 +1,78 @@
+.texto{
+   color: #7120EA;
+}
+
+.letra{
+   color: #000000;
+   font-size: 200%;
+   text-align: center;
+  
+}
+.letra1{
+   color: #000000;
+   font-size: 150%;
+   text-align: center;
+}
+
+.div1{
+   position: relative;
+   top: 45%;
+}
+.botones{
+   width: 30%;
+}
+
+.monto-qr{
+   font-size: 30px
+}
+
+.borrar{
+   height: 46%;
+   width: 100%;
+}
+.ok{
+    height: 46%;
+    width: 100%;
+    background-color: #631cce;
+}
+.imagen{
+    width: 30px;
+}
+.imagen1{
+   width: 30%;
+}
+.monto{
+   font-size: 25px;
+}
+
+
+.parpadea {
+  
+   animation-name: parpadeo;
+   animation-duration: 1s;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+ 
+   -webkit-animation-name:parpadeo;
+   -webkit-animation-duration: 1s;
+   -webkit-animation-timing-function: linear;
+   -webkit-animation-iteration-count: infinite;
+ }
+ 
+ @-moz-keyframes parpadeo{  
+   0% { opacity: 1.0; }
+   50% { opacity: 0.0; }
+   100% { opacity: 1.0; }
+ }
+ 
+ @-webkit-keyframes parpadeo {  
+   0% { opacity: 1.0; }
+   50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+ }
+ 
+ @keyframes parpadeo {  
+   0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+   100% { opacity: 1.0; }
+ }  

@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-item color="primary" lines="none">
+        <ion-icon name="md-stats" class="icono"></ion-icon>
+        <ion-title>
+            Movimientos
+          </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div>
+    <ion-segment [(ngModel)]="movimientos">
+      <ion-segment-button class="balance" value="balance" >
+        Balance
+      </ion-segment-button>
+      <ion-segment-button value="ingresos" class="ingreso" >
+        Ingresos
+      </ion-segment-button>
+      <ion-segment-button value="egresos" class="egreso" >
+        Egresos
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+ 
+  <div [ngSwitch]="movimientos" class="segment">
+    <ion-list *ngSwitchCase="'balance'">
+      <ion-card style="text-align: right">
+        <h5><b>Total: {{balance1}} Bs.</b> </h5>
+      </ion-card>
+      <ion-label>
+        <ion-list *ngFor="let usu of ordenado ">
+          <ion-item *ngIf="usu.identificador == '1'" with="90%" (click)="detalleingresoegreso(usu)">
+            <ion-label>
+              <h2 class="ingreso" *ngIf="usu.nombre == ''" >{{usu.telefono}} </h2>
+              <h2 class="ingreso" *ngIf="usu.nombre != ''">{{usu.nombre}} </h2>
+                <p>{{usu.fechita}}</p>
+                <p class="ir" >+{{usu.monto}} Bs.</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usu.identificador == '0'" (click)="detalleegreso(usu)">
+            <ion-label>
+              <h2 class="egreso" *ngIf="usu.nombre == ''">{{usu.telefono}} </h2>
+              <h2 class="egreso" *ngIf="usu.nombre != ''">{{usu.nombre}} </h2>
+                <p>{{usu.fechita}}</p>
+                <p class="ir">-{{usu.monto}} Bs.</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-label>
+    </ion-list>
+
+   
+    <ion-list *ngSwitchCase="'ingresos'">
+      <ion-card style="text-align: right">
+        <h5><b>Total: {{ingreso1}} Bs.</b> </h5>
+      </ion-card>
+      <ion-label>
+        <ion-list>
+          <ion-item *ngFor="let usu of consulta" (click)="detalleingresoegreso(usu)">
+            <ion-label>
+                <h2 class="ingreso" *ngIf="usu.nombre == ''" >{{usu.telefono}} </h2>
+                <h2 class="ingreso" *ngIf="usu.nombre != ''">{{usu.nombre}} </h2>
+                <p>{{usu.fechita}}</p>
+                <p class="ir"> +{{usu.monto}} Bs.</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-label>
+  
+    </ion-list>
+    <ion-list *ngSwitchCase="'egresos'">
+      <ion-card style="text-align: right">
+        <h5><b>Total: {{egreso1}} Bs.</b> </h5>
+      </ion-card>
+      <ion-label>
+        <ion-list>
+          <ion-item *ngFor="let usu of datito " (click)="detalleegreso(usu)">
+            <ion-label>
+                <h2 class="egreso" *ngIf="usu.nombre == ''">{{usu.telefono}} </h2>
+                <h2 class="egreso" *ngIf="usu.nombre != ''">{{usu.nombre}} </h2>
+                <p>{{usu.fechita}}</p>
+                <p class="ir">-{{usu.monto}} Bs.</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-label>
+    </ion-list>
+  </div>
+</ion-content>

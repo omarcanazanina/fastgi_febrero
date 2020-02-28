@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+    </ion-buttons>
+    <ion-item lines="none" color="primary">
+      <ion-icon name="cash" slot="start"></ion-icon>
+      <ion-label>Balance</ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="ocultara == 0">
+    <p class="nombre">{{nombre}}</p>
+    <p class="caja">{{cajareal}} Bs. </p>
+    <div class="botones">
+      <ion-button color="success" [routerLink]="['/tabs/tab2/cargarsaldo',dato]">Cargar</ion-button><br>
+      <ion-button color="medium" [routerLink]="['/tabs/tab2/retirarsaldo',dato2]">Retirar</ion-button>
+    </div>
+  </div>
+</ion-content>

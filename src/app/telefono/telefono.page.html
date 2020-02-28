@@ -1,0 +1,51 @@
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-buttons>
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    </ion-buttons>
+    <ion-title>Registrarse</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="dark">
+    <div id="recaptcha-container1"></div>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12" size-sm="12" size-md="6" offset-md="3">
+          <div class="ion-text-justify">
+            Te enviaremos un <ion-text color="primary">sms</ion-text> con el código de verificación.
+          </div>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="6" offset-md="3">
+          <ion-select placeholder="seleccione código" interface="popover" class="ion-padding" [(ngModel)]="codtel">
+            <!--Bolivia-->
+            <ion-select-option value="+591" selected>+591 🇧🇴 Bolivia</ion-select-option>
+            <!--Argentina-->
+            <ion-select-option  value="+54">+54 🇦🇷 Argentina</ion-select-option>
+            <!--Perú-->
+            <ion-select-option value="+51">+51 🇵🇪 Perú</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col *ngIf="codtel == ''" size="12" size-sm="12" size-md="6" offset-md="3">
+          <ion-input placeholder="Número"  class="ion-padding" type="number" readonly></ion-input>
+        </ion-col>
+        <ion-col *ngIf="codtel != ''" size="12" size-sm="12" size-md="6" offset-md="3">
+          <ion-input placeholder="Número" [(ngModel)]="phoneNumber" class="ion-padding" type="number"></ion-input>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="6" offset-md="3">
+          <div class="ion-text-justify">
+            El número que proporcionas servirá para que tus contactos puedan encontrarte y por razones de seguridad.
+          </div>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" offset-md="4" class="footer ion-padding">
+  
+          <ion-button size="large" expand="full" shape="round" (click)="registrar(codtel,phoneNumber)">
+            Registrarse
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>

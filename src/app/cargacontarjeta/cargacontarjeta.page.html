@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Metodo de carga
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <p class="textito">{{monto}}</p>
+  <ion-list>
+    <ion-radio-group>
+      <ion-list-header>
+        <ion-label>Tarjetas</ion-label>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let dato of tarjetas " [routerLink]="['/tabs/tab2/cargarsaldo',dato.numerito]" >
+        <ion-img src="./assets/visa.png" class="imagen" ></ion-img>
+        <p class="texto"> ····{{dato.numerito}}</p>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <div class="carga"   >
+    <ion-item class="nuevo" [routerLink]="['/tabs/tab2/confirmacargasaldo',monto]">
+      <p class="letra">+ Agregar metodo de carga</p>
+    </ion-item>
+  </div>
+
+</ion-content>

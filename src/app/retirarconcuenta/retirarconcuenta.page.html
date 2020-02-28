@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+     Metodo de retiro
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <p class="textito">{{monto}}</p>
+  <ion-list>
+    <ion-radio-group>
+      <ion-list-header>
+        <ion-label>Cuentas</ion-label>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let dato of cuentas " [routerLink]="['/tabs/tab2/retirarsaldo',dato.cuenta]">
+        <ion-img src="./assets/museum.svg" class="imagen"></ion-img>
+        <ion-label>{{dato.cuenta}}</ion-label>
+        <p>{{dato.banco}}</p>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <div class="carga"   >
+    <ion-item class="nuevo" [routerLink]="['/tabs/tab2/confirmaretirosaldo',monto]">
+      <p class="letra">+ Agregar metodo de carga</p>
+    </ion-item>
+  </div>
+</ion-content>

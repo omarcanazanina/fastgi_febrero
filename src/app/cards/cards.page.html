@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Pagar por QR </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/ingresoegreso"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div (click)="label()">
+    <div style="margin:auto; width:50%"><b>{{nombrebd}}</b></div>
+    <p>Monto a cancelar:</p>
+
+    <ion-item *ngIf="monto == '' && controladorteclado == 1">
+      <ion-item class="pin" >
+       Bs.{{monto}} <p class="parpadea"> |</p>
+      </ion-item>
+    </ion-item>
+
+    <ion-item *ngIf="monto != '' && controladorteclado == 1">
+      <ion-item class="pin" >
+       Bs.{{monto}} <p class="parpadea"> |</p>
+      </ion-item>
+    </ion-item>
+
+    <ion-item *ngIf="monto != '' && controladorteclado == 0">
+      <ion-item class="pin" >
+       Bs.{{monto}} 
+      </ion-item>
+    </ion-item>
+
+    <ion-item *ngIf="monto == '' && controladorteclado == 0">
+      <ion-item class="pin">
+        Bs.{{monto}}
+      </ion-item>
+    </ion-item>
+  </div>
+
+  <div class="div1" *ngIf="controladorteclado == 1">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="9">
+          <ion-button color="light" *ngFor="let n of gruponum" (click)="presionar(n)" class="botones">{{n}}
+          </ion-button>
+          <ion-button color="light" class="imagen1" (click)="ocultar()"><ion-img src="./assets/icon/teclado.svg" class="imagen"></ion-img></ion-button>
+        </ion-col>
+        <ion-col size="3">
+          <ion-button color="light" class="borrar" (click)="borrar()"><ion-img src="./assets/icon/retroceso.svg" class="imagen"></ion-img></ion-button>
+          <ion-button  class="ok" (click)="confirmapago(monto)">ok</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

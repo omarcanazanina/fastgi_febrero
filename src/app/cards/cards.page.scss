@@ -1,0 +1,67 @@
+
+.texto{
+    font-size: 40px;
+}
+.botones{
+    width: 30%;
+ }
+ .div1{
+    position: relative;
+    top: 20%;
+ }
+.pin{
+    font-size: 30px;
+}
+.ok{
+   height: 46%;
+   width: 100%;
+   background-color: #631cce;
+}
+
+.imagen{
+   width: 30px;
+}
+.imagen1{
+  width: 30%;
+}
+.botonsito{ 
+   width: 100%;
+   height: 50%;
+}
+.borrar{
+   height: 46%;
+   width: 100%;
+}
+
+
+
+.parpadea {
+  
+   animation-name: parpadeo;
+   animation-duration: 1s;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+ 
+   -webkit-animation-name:parpadeo;
+   -webkit-animation-duration: 1s;
+   -webkit-animation-timing-function: linear;
+   -webkit-animation-iteration-count: infinite;
+ }
+ 
+ @-moz-keyframes parpadeo{  
+   0% { opacity: 1.0; }
+   50% { opacity: 0.0; }
+   100% { opacity: 1.0; }
+ }
+ 
+ @-webkit-keyframes parpadeo {  
+   0% { opacity: 1.0; }
+   50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+ }
+ 
+ @keyframes parpadeo {  
+   0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+   100% { opacity: 1.0; }
+ }  

@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-searchbar color="primary" placeholder="Buscar contacto" animated (ionChange)="BuscarContacto( $event )">
+    </ion-searchbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ {{cont}}
+  <ion-list>
+    <ion-item *ngFor="let usu of todosdatosordenado| filtro: textoBuscar" lines="none" (click)="enviadatos(usu)">
+        <ion-avatar item-start>
+          <img src="assets/svg/logo_contact.svg">
+        </ion-avatar>
+        <ion-label class="label-alumnos"> {{usu.nombre}}
+          <p> {{usu.telefono}} </p>
+        </ion-label>
+    </ion-item>
+  </ion-list>
+<p>Invitar</p>
+
+{{cont1}}
+  <ion-list>
+    <ion-item *ngFor="let usu of todosdatosordenado1 | filtro: textoBuscar " lines="none">
+        <ion-avatar item-start>
+          <ion-icon name="md-contact" size="large"></ion-icon>
+        </ion-avatar>
+        <ion-label class="label-alumnos"> {{usu.nombre}}
+          <p> {{usu.telefono}} </p>
+        </ion-label>
+        <ion-button (click)="invitar()" slot="end" shape="round">
+          Invitar
+        </ion-button>
+    </ion-item>
+  </ion-list>
+ <!--
+
+  <ion-list>
+    <ion-item *ngFor="let usu of ContactsTrue | filtro: textoBuscar" lines="none" (click)="enviadatos(usu)">
+      <ion-avatar item-start>
+        <img src="assets/svg/logo_contact.svg" >
+      </ion-avatar>
+      <ion-label class="label-alumnos"> {{usu.name.formatted}}
+        <p> {{usu.phoneNumbers[0].value}} </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    Invitar amigos
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let u of ContactsNone | filtro: textoBuscar" lines="none">
+      <ion-avatar item-start>
+        <ion-icon name="md-contact" size="large"></ion-icon>
+      </ion-avatar>
+      <ion-label class="label-alumnos"> {{u.name.formatted}}
+        <p>{{u.phoneNumbers[0].value}}</p>
+      </ion-label>
+      <ion-button (click)="invitar()" slot="end" shape="round">
+        Invitar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  -->
+</ion-content>

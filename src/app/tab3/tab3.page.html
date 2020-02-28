@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-item color="primary" lines="none">
+      <ion-icon name="person"></ion-icon>
+      <ion-title>Mi perfil</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+ 
+  <ion-list>
+    <ion-item lines="none">
+      <ion-icon slot='start' name="moon"></ion-icon>
+      <ion-label> Modo oscuro</ion-label>
+      <ion-toggle slot="end" [ngModel]="darkmode" (ionChange)="darktheme()"></ion-toggle>
+    </ion-item>
+    <ion-item lines="none" >
+      <ion-icon name="md-call" slot="end" ></ion-icon>
+      {{usuario.codtel}} {{usuario.telefono}}
+    </ion-item>
+    <ion-item lines="none" *ngIf="controlnombre == 0 ">
+      <ion-icon name="create" slot="end" (click)="editarnombre()"></ion-icon>
+      <ion-icon name="person" slot="end" ></ion-icon>
+      <p>Nombre</p>
+    </ion-item>
+    <ion-item lines="none" *ngIf="controlnombre == 1 ">
+        <ion-icon name="create" slot="end"  (click)="editarnombre()"></ion-icon>
+        <ion-icon name="person" slot="end" ></ion-icon>
+        {{usuario.nombre}}
+      </ion-item>
+    <ion-item lines="none" *ngIf="controlcorreo == 0 ">
+      <ion-icon name="create" slot="end" (click)="editarcorreo()"></ion-icon>
+      <ion-icon name="md-mail" slot="end" ></ion-icon>
+      <p >Correo</p>
+    </ion-item>
+    <ion-item lines="none" *ngIf="controlcorreo == 1 ">
+        <ion-icon name="create" slot="end"  (click)="editarcorreo()"></ion-icon>
+        <ion-icon name="md-mail" slot="end" ></ion-icon>
+        {{usuario.correo}}
+      </ion-item>
+    <ion-item lines="none">
+      <ion-icon name="create" slot="end"  (click)='mod()'></ion-icon>
+      <ion-icon name="unlock" slot="end" ></ion-icon>
+      Pin
+    </ion-item>
+    <ion-item lines="none" (click)=' cerrarsesion()'>
+      <ion-icon name="md-log-in" slot="end" ></ion-icon>
+      Cerrar session
+    </ion-item>
+  </ion-list>
+</ion-content>

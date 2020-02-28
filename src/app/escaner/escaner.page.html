@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Pagar</ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="/ingresoegreso"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <br><br>
+  <b>Se pagara al Usuario:</b>
+  <br><br>
+    <div style="margin:auto; width:50%"><b>{{nombrebd}}</b></div>
+    <br><br>
+    <p>Segun la lectura QR el monto a cancelar es:</p>
+          <ion-item>
+            <ion-label class="texto" >Bs.</ion-label>
+            <ion-input type="number" class="texto"  name="montito"  value="{{monto}}" readonly></ion-input>
+          </ion-item>
+    <ion-button  expand="full" (click)='pagar1(monto)'>  Aceptar</ion-button>
+</ion-content>

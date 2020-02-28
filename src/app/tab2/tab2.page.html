@@ -1,0 +1,47 @@
+<ion-header class="dark">
+  <ion-toolbar color="primary">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col (click)="scan()" text-center>
+          <img src="assets/svg/logo_give_qr.svg" class="tamano">
+          <br> Escaner
+        </ion-col>
+        <ion-col routerLink="/tabs/tab2/recibedinero" text-center>
+          <img src="assets/svg/logo_recive.svg" class="tamano">
+          <br> Recibir
+        </ion-col>
+        <ion-col (click)="historial()" text-center>
+          <ion-icon name="cash"  size="large" class="tamano"></ion-icon>
+          <br> {{usuario.cajainterna}} Bs.
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="dark">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" size-sm="12" size-md="6" offset-md="3">
+        <div class="ion-text-justify">
+          <ion-text color="primary">Muy importante: </ion-text>Señor(a) usuario para relaizar pagos agregar dinero al
+          balance.
+        </div>
+      </ion-col>
+      <ion-col size="12" size-sm="12" size-md="6" offset-md="3">
+        <div class="ion-text-justify">
+          Puede observar su saldo en la parte superior.
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--
+ <h1>{{cadena}}</h1>
+ <h1>{{separado}}</h1>
+ <ion-button (click)="funcion()">
+   boton
+ </ion-button>
+  -->
+
+
+</ion-content>

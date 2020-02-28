@@ -1,0 +1,36 @@
+<ion-content class="ion-padding">
+    <ion-item no-padding>
+        <ion-avatar item-start >
+            <img src="assets/svg/logo_contact.svg" >
+        </ion-avatar>
+            <h3 class="titulo">Detalle Ingreso</h3>
+            <ion-button slot="end" fill="clear" (click)="closeUsuario()" ><ion-icon color="light" name="close" color="primary" class="icono"></ion-icon></ion-button>
+    </ion-item>
+    <ion-grid >
+        <ion-row >
+          <ion-col size="5">Monto:</ion-col>
+          <ion-col size="7">{{usu.monto}} Bs.</ion-col>
+        </ion-row>
+        <ion-row >
+          <ion-col size="5">Origen:</ion-col>
+          <ion-col size="7">{{usu.nombre}}</ion-col>
+        </ion-row >
+        <ion-row>
+            <ion-col size="5">Telefono:</ion-col>
+            <ion-col size="7">{{usu.telefono}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="5">Descripción:</ion-col>
+            <ion-col size="7">{{usu.descripcion}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="5">Fecha:</ion-col>
+            <ion-col size="7">{{usu.fechita}}</ion-col>
+        </ion-row>
+        <ion-row>
+        <ion-col size="5">Saldo Balance:</ion-col>
+            <ion-col size="7">{{usu.saldo}} Bs.</ion-col>
+        </ion-row>
+      </ion-grid>
+
+</ion-content>
