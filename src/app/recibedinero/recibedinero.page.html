@@ -21,7 +21,7 @@
     <a [href]="href" *ngIf="display" (click)="downloadImage()" download >Download Image</a>
   </div>
   -->
-<!--
+  <!--
 
   el q sirve
 
@@ -31,7 +31,7 @@
   <a [href]="href"  (click)="downloadImage()" download>Download Image</a>
 -->
 
-<!--
+  <!--
 
   <ion-input type="text" placeholder="dato" [(ngModel)]="qrData">
   </ion-input>
@@ -77,9 +77,7 @@
     </ion-item>
     <ngx-qrcode [qrc-value]="createdCode" qrc-class="test-class"></ngx-qrcode>
     <ion-item text-right lines="none">
-
-
-      <ion-label class="ion-no-margin" routerLink="/tabs/tab2/cobroqr" class="botonsito">+Agregar monto</ion-label>
+      <ion-item slot="end" class="ion-no-margin" routerLink="/cobroqr" class="botonsito">+Agregar monto</ion-item>
     </ion-item>
   </ion-list>
 </ion-content>

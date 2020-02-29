@@ -13,7 +13,9 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
  -->
+<p *ngIf="c == 2">
 
+</p>
   <div *ngIf="c == 0">
     <p class="textito">Usted no tiene ninguna transacción</p><br>
     <p class="textito">Presionar el icono de la parte inferior para realizar transacciones</p>
@@ -27,7 +29,7 @@
   <div *ngIf="c == 1 ">
     <ion-grid>
       <ion-row>
-        <ion-col size="10">
+        <ion-col size="12">
           <ion-item *ngFor="let usu of historial   " lines="none" (click)="enviadatos(usu)">
             <ion-avatar item-start>
               <img src="assets/svg/logo_contact.svg">
@@ -37,17 +39,18 @@
             </ion-label>
           </ion-item>
         </ion-col>
+        <!--
         <ion-col size="2">
-          <!--
+         
           <div *ngFor="let dato of badges">
             <h2>{{dato.a}}</h2>
           </div>
 
           <h1>{{datito}}a</h1>
-          -->
-        </ion-col>
-      
        
+        </ion-col>
+         -->
+
       </ion-row>
     </ion-grid>
 
@@ -60,7 +63,7 @@
   </div>
 
   <div *ngIf="controlador == 1">
-    <ion-item *ngIf="controlador == 1">
+    <ion-item *ngIf="ctitulo == 1">
       Fastgi
     </ion-item>
     <ion-list>
@@ -115,7 +118,7 @@
     </ion-row>
   </ion-grid>
 -->
-  
+
 
 
 </ion-content>

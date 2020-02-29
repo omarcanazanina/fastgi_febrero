@@ -337,13 +337,17 @@ export class AuthService {
     }))
   }
   // alertas de aviso para el pago
+
+
   async presentToast(monto, usu) {
-    const toast = await this.toastController.create({
+    const alert = await this.alertController.create({
+      header: 'Fastgi',
+      backdropDismiss:false,
+      // subHeader: 'Envio Exitoso',
       message: 'El pago de ' + monto + ' Bs. a ' + usu + ' se realizo correctamente',
-      duration: 3000,
-      position: 'top'
+      buttons: ['Aceptar']
     });
-    toast.present();
+    await alert.present();
   }
   // // alerta img save exit
   // async imgsave() {

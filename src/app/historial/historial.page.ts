@@ -123,8 +123,10 @@ export class HistorialPage implements OnInit {
     this.textoBuscar = event.target.value;
     if (this.textoBuscar != '') {
       this.controlador = 1
+      this.c = 2
     } else {
       this.controlador = 0
+      this.c = 1
     }
   }
 
@@ -154,7 +156,7 @@ export class HistorialPage implements OnInit {
   }
 
   enviadatos2(usu) {
-    this.route.navigate(['/tabs/historial/pagarenviocobro', usu.phoneNumbers[0].value, usu.name.formatted])
+    this.route.navigate(['pagarenviocobro', usu.telefono, usu.nombre])
   }
 
   invitar() {

@@ -23,7 +23,6 @@ const routes: Routes = [
             loadChildren: '../historial/historial.module#HistorialPageModule'
           },
           //para los contactos 
-          //{path: 'pagarenviocobro/:id/:nombre', loadChildren: '../pagarenviocobro/pagarenviocobro.module#PagarenviocobroPageModule' },
           { path: 'transferencias', loadChildren: '../transferencias/transferencias.module#TransferenciasPageModule' }
         ]
       },
@@ -42,7 +41,7 @@ const routes: Routes = [
           { path: 'retirarconcuenta/:id', loadChildren: '../retirarconcuenta/retirarconcuenta.module#RetirarconcuentaPageModule' },
           //generar qr
           { path: 'recibedinero', loadChildren: '../recibedinero/recibedinero.module#RecibedineroPageModule' },
-          { path: 'cobroqr', loadChildren: '../cobroqr/cobroqr.module#CobroqrPageModule' },
+          //{ path: 'cobroqr', loadChildren: '../cobroqr/cobroqr.module#CobroqrPageModule' },
           //pagos personalmente
           { path: 'cards/:phoneNumber', loadChildren: '../cards/cards.module#CardsPageModule' },
           { path: 'escaner/:monto/:phoneNumber', loadChildren: '../escaner/escaner.module#EscanerPageModule' },
