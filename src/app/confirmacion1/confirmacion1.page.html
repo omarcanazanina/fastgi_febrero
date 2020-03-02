@@ -17,25 +17,25 @@
 
     <ion-item *ngIf="pin == '' && controladorteclado == 1">
       <ion-item class="pin">
-        Bs.{{pin}} <p class="parpadea"> |</p>
+        PIN.{{pin}} <p class="parpadea"> |</p>
       </ion-item>
     </ion-item>
 
     <ion-item *ngIf="pin != '' && controladorteclado == 1">
       <ion-item class="pin">
-        Bs.{{pin}} <p class="parpadea"> |</p>
+        PIN.{{pin}} <p class="parpadea"> |</p>
       </ion-item>
     </ion-item>
 
     <ion-item *ngIf="pin != '' && controladorteclado == 0">
       <ion-item class="pin">
-        Bs.{{pin}}
+        PIN.{{pin}}
       </ion-item>
     </ion-item>
 
     <ion-item *ngIf="pin == '' && controladorteclado == 0">
       <ion-item class="pin">
-        Bs.{{pin}}
+        PIN.{{pin}}
       </ion-item>
     </ion-item>
   </ion-card>

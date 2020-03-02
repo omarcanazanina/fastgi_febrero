@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding >
+<ion-content >
 
   <div *ngIf="numero == 0">
     <ion-item class="monto"> Bs: {{qrData}}<p class="parpadea">|</p>
@@ -26,25 +26,25 @@
     <ion-item lines="none" text-center>
       <ion-label class="ion-no-margin monto-qr"> {{qrData}} Bs.</ion-label>
     </ion-item>
-    
+
     <ngx-qrcode [qrc-value]="createdCode" qrc-class="test-class"></ngx-qrcode>
 
     <ion-item (click)="volver()" text-right lines="none">
       <ion-label class="texto">Limpiar monto</ion-label>
     </ion-item>
   </ion-list>
-
-  <div class="div1" *ngIf="numero == 0 ">
+  <!--
+   <div class="div1" *ngIf="numero == 0 ">
     <ion-grid>
       <ion-row>
         <ion-col size="9">
           <ion-button color="light" *ngFor="let n of gruponum" (click)="presionar(n)" class="botones">{{n}}</ion-button>
-          <ion-button  class="imagen1" (click)="ocultar()">
+          <ion-button class="imagen1" (click)="ocultar()">
             <ion-img src="./assets/icon/teclado.svg" class="imagen"></ion-img>
           </ion-button>
         </ion-col>
         <ion-col size="3">
-          <ion-button  class="borrar" (click)="borrar()">
+          <ion-button class="borrar" (click)="borrar()">
             <ion-img src="./assets/icon/retroceso.svg" class="imagen"></ion-img>
           </ion-button>
           <ion-button class="ok" (click)="createCode()">OK</ion-button>
@@ -52,6 +52,24 @@
       </ion-row>
     </ion-grid>
   </div>
+-->
+<div class="prueba" >
+  <ion-row>
+    <ion-col size="9">
+      <ion-button color="light" *ngFor="let n of gruponum" (click)="presionar(n)" class="botones">{{n}}</ion-button>
+      <ion-button class="imagen1" (click)="ocultar()">
+        <ion-img src="./assets/icon/teclado.svg" class="imagen"></ion-img>
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button class="borrar" (click)="borrar()">
+        <ion-img src="./assets/icon/retroceso.svg" class="imagen"></ion-img>
+      </ion-button>
+      <ion-button class="ok" (click)="createCode()">OK</ion-button>
+    </ion-col>
+  </ion-row>
+</div>
+
 
 
 </ion-content>
