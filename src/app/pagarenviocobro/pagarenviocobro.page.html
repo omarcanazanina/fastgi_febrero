@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>{{nombrebd}} </ion-title>
+    <ion-title>{{nombrebd}}    </ion-title>
     <ion-buttons slot="start">
 
       <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
@@ -164,11 +164,12 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="6" text-center (click)="confirmacion1(detalle)">transferir</ion-col>
-      <ion-col size="6" text-center (click)="enviacobro(detalle)">Cobrar</ion-col>
+      <ion-col size="5.9" text-center (click)="confirmacion1(detalle)">transferir</ion-col>
+      <ion-col size="0.4" ><div class="pleca"></div></ion-col>
+      <ion-col size="5.7" text-center (click)="enviacobro(detalle)">Cobrar</ion-col>
     </ion-row>
   </ion-grid>
-
+<!--
   <div class="div1" *ngIf="controladorteclado == 1">
     <ion-grid>
       <ion-row>
@@ -187,5 +188,31 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+  </div>
+  
+-->
+
+
+  <div class="keyboard" *ngIf="controladorteclado == 1">
+    <div class="div"></div>
+ <ion-grid>
+      <ion-row>
+        <ion-col size="9" class="box">
+            <ion-button color="light" *ngFor="let n of gruponum" (click)="presionar(n)"  class="btn">{{n}}
+            </ion-button>
+            <ion-button class="btn-ocultar"  (click)="ocultar()">
+              <ion-img src="./assets/icon/teclado.svg" class="imagen"></ion-img>
+            </ion-button>
+        </ion-col>
+        <ion-col size="3" class="box">
+            <ion-button class="btn-borrar"  (click)="borrar()">
+              <ion-img src="./assets/icon/retroceso.svg" class="imagen"></ion-img>
+            </ion-button>
+            <ion-button class="btn-ok"  (click)="ok()">OK</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+   
   </div>
 </ion-footer>

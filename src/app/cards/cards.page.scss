@@ -5,10 +5,7 @@
 .botones{
     width: 30%;
  }
- .div1{
-    position: relative;
-    top: 20%;
- }
+ 
 .pin{
     font-size: 30px;
 }
@@ -65,3 +62,74 @@
     50% { opacity: 0.0; }
    100% { opacity: 1.0; }
  }  
+
+
+  
+ ion-grid{
+   height: 30px ;
+   background: #282637;
+   color: #fff;
+   margin: 0;
+   padding: 0;
+   ion-row{
+      margin: 0;
+      padding: 0;
+      ion-col{
+         margin: 0;
+         padding: 0;
+         ion-button{
+            margin: 0;
+            padding: 0;
+         }
+      }
+   }
+ }
+
+ .keyboard{
+    position: relative;
+    top: 24%;
+   /*=================*/
+   /* Propiedad para tamaño
+   /*=================*/
+   height: 250px;
+   /*=================*/
+   /* Margenes inferior y laterales
+   /*=================*/
+   margin-left: 2px;
+   margin-right: 2px;
+   margin-bottom: 2px;
+   // background-color: grey;
+}
+
+.box{
+   // border: 1px solid red;
+   /*=================*/
+   /* Propiedad para tamaño
+   /*=================*/
+   height: 250px;
+}
+
+
+.btn{
+   height: 22%;
+   width: 33%;
+   padding: 2px !important;
+   border-radius: 15px !important;
+}
+
+.btn-ocultar{
+   height: 22%;
+   padding: 2px !important;
+   width: 33%;
+}
+
+.btn-borrar{
+   height: 44%;
+   width: 100%;
+   padding: 2px 2px 2px 0px !important
+}
+.btn-ok{
+    height: 44%;
+    width: 100%;
+    padding: 2px 2px 2px 0px !important
+}

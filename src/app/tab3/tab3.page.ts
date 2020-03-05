@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../servicios/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { firestore } from 'firebase';
-
 export interface Image {
   id: string;
   image: string;
@@ -18,19 +13,14 @@ export interface Image {
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  perfil=0
+  urlfinal:any
   url: any;
-  // newImage: Image = {
-  //   id: this.afs.createId(), image: ''
-  // }
   loading: boolean = false;
   darkmode: boolean = true;
   constructor(private au: AuthService,
     public alertController: AlertController,
     private route: Router,
-    //
-    private afs: AngularFirestore,
-    private storage: AngularFireStorage,
-    private camera: Camera,
 
   ) {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -176,5 +166,31 @@ export class Tab3Page {
     this.darkmode = !this.darkmode
     document.body.classList.toggle('dark')
 
+  }
+
+  image(){
+    this.au.takeGalley().then(res =>{
+      let load = this.au.loading()
+      this.au.uploadImgB64('user/'+this.usuario.telefono+'galery.jpg',res).then( url =>{
+        this.urlfinal=url
+        this.perfil=1
+        load.then(loading => {
+         loading.dismiss();
+       })
+      }).catch(err => alert('error de upload'+err))
+    }).catch(err =>alert(err))
+  }
+
+  camara(){
+    this.au.takecamera().then(res =>{
+      let load = this.au.loading()
+      this.au.uploadImgB64('user/'+this.usuario.telefono+'camara.jpg',res).then( url =>{
+        this.urlfinal=url
+        this.perfil=1
+        load.then(loading => {
+          loading.dismiss();
+        })
+      }).catch(err => alert('error de upload'+err))
+    }).catch(err =>alert(err))
   }
 }

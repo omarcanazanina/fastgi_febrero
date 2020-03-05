@@ -8,6 +8,21 @@
 </ion-header>
 
 <ion-content >
+  <ion-avatar class="perfil" *ngIf="perfil == 0">
+    <img src= '../../assets/icon/default.jpg'>
+</ion-avatar>
+  <ion-avatar class="perfil" *ngIf="perfil == 1">
+       <img [src]= 'urlfinal'>
+  </ion-avatar>
+ 
+  <ion-item >
+    <ion-button class="boton" (click)="camara()">
+      camara
+    </ion-button>
+    <ion-button class="boton" (click)="image()">
+     galeria
+    </ion-button>
+  </ion-item>
  
   <ion-list>
     <ion-item lines="none">
@@ -49,4 +64,5 @@
       Cerrar session
     </ion-item>
   </ion-list>
+
 </ion-content>

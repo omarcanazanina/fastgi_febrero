@@ -3,10 +3,12 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
+import { map, finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ToastController, AlertController, NavController, LoadingController } from '@ionic/angular';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 
 export interface usu {
@@ -75,7 +77,9 @@ export class AuthService {
     public alertController: AlertController,
     public nav: NavController,
     private emailComposer: EmailComposer,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private camera: Camera,
+    private afStorage:AngularFireStorage
   ) { }
 
 
@@ -751,7 +755,7 @@ export class AuthService {
   async enviocorreo1(idusuario, telefonousuario) {
     const alert = await this.alertController.create({
       header: 'Muy importante!',
-      subHeader: 'Debe ingresar su PIN para realizar todas las transacciones El CORREO para enviar sus datos para que pueda guardarlo',
+      message: 'PIN para realizar transacciones, CORREO para guardar sus datos.',
       backdropDismiss: false,
       inputs: [
         {
@@ -863,6 +867,67 @@ export class AuthService {
   deletecontact(id,uid): Promise <void> {
     return this.fire.collection('/user/'+id+'/contactos').doc(uid).delete()
   }
+
+
+
+
+takecamera(){
+  const options: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
+  
+  return this.camera.getPicture(options).then((imageData) => {
+   // imageData is either a base64 encoded string or a file URI
+   // If it's base64 (DATA_URL):
+  let base64Image = 'data:image/jpeg;base64,' + imageData;
+  return base64Image
+  });
+}
+
+  takeGalley(){
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    return this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+    let base64Image = 'data:image/jpeg;base64,' + imageData;
+    return base64Image
+    });
+  }
+
+    // subir imagen base 64
+    uploadImgB64(path: string, imageB64): Promise<any> {
+      return new Promise((resolve, reject) => {
+        let ref = this.afStorage.ref(path)
+        let task = ref.putString(imageB64, 'data_url');
+        task.snapshotChanges().pipe(
+          finalize(() => {
+            ref.getDownloadURL().subscribe(data => {
+              console.log(data);
+              resolve(data)
+            })
+          })
+        )
+          .subscribe()
+      });
+    }
+    async loading() {
+      const loading = await this.loadingController.create({
+        message: 'Espere por favor...',
+        duration: 2000
+      });
+      await loading.present();
+      return loading;
+    }
 
 }
 

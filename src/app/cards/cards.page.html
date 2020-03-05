@@ -36,8 +36,8 @@
       </ion-item>
     </ion-item>
   </div>
-
-  <div class="div1" *ngIf="controladorteclado == 1">
+<!--
+ <div class="div1" *ngIf="controladorteclado == 1">
     <ion-grid>
       <ion-row>
         <ion-col size="9">
@@ -48,6 +48,27 @@
         <ion-col size="3">
           <ion-button color="light" class="borrar" (click)="borrar()"><ion-img src="./assets/icon/retroceso.svg" class="imagen"></ion-img></ion-button>
           <ion-button  class="ok" (click)="confirmapago(monto)">ok</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+-->
+ 
+  <div class="keyboard" *ngIf="controladorteclado == 1">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="9" class="box">
+            <ion-button color="light" *ngFor="let n of gruponum" (click)="presionar(n)"  class="btn">{{n}}
+            </ion-button>
+            <ion-button class="btn-ocultar"  (click)="ocultar()">
+              <ion-img src="./assets/icon/teclado.svg" class="imagen"></ion-img>
+            </ion-button>
+        </ion-col>
+        <ion-col size="3" class="box">
+            <ion-button class="btn-borrar"  (click)="borrar()">
+              <ion-img src="./assets/icon/retroceso.svg" class="imagen"></ion-img>
+            </ion-button>
+            <ion-button class="btn-ok"  (click)="confirmapago(monto)">OK</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

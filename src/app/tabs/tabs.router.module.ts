@@ -43,7 +43,7 @@ const routes: Routes = [
           { path: 'recibedinero', loadChildren: '../recibedinero/recibedinero.module#RecibedineroPageModule' },
           //{ path: 'cobroqr', loadChildren: '../cobroqr/cobroqr.module#CobroqrPageModule' },
           //pagos personalmente
-          { path: 'cards/:phoneNumber', loadChildren: '../cards/cards.module#CardsPageModule' },
+          //{ path: 'cards/:phoneNumber', loadChildren: '../cards/cards.module#CardsPageModule' },
           { path: 'escaner/:monto/:phoneNumber', loadChildren: '../escaner/escaner.module#EscanerPageModule' },
         ]
       }, {

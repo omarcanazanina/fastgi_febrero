@@ -19,7 +19,8 @@ const routes: Routes = [
 
   {path: 'pagarenviocobro/:id/:nombre', loadChildren: './pagarenviocobro/pagarenviocobro.module#PagarenviocobroPageModule' },
   { path: 'telefono', loadChildren: './telefono/telefono.module#TelefonoPageModule' },
-  { path: 'cobroqr', loadChildren: './cobroqr/cobroqr.module#CobroqrPageModule' }
+  { path: 'cobroqr', loadChildren: './cobroqr/cobroqr.module#CobroqrPageModule' },
+  { path: 'cards/:phoneNumber', loadChildren: './cards/cards.module#CardsPageModule' },
   
 
 ];

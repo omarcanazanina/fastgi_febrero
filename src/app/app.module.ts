@@ -37,7 +37,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { PipesModule } from './pipes/pipes.module';
 import {EmailComposer} from '@ionic-native/email-composer/ngx'
 import { Camera } from '@ionic-native/camera/ngx';
-import { File } from '@ionic-native/file/ngx';
+//import { File } from '@ionic-native/file/ngx';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import {IonicStorageModule} from '@ionic/storage';
@@ -101,7 +101,7 @@ export const firebaseConfig = {
     SocialSharing,
     InAppBrowser,
     Camera,
-    File,
+   // File,
     Base64ToGallery ,
     Keyboard
   ],
