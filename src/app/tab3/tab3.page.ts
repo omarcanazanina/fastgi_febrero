@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../servicios/auth.service';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ActionSheetController, ModalController } from '@ionic/angular';
+import { ModalperfilPage } from '../modalperfil/modalperfil.page';
 export interface Image {
   id: string;
   image: string;
@@ -21,7 +22,8 @@ export class Tab3Page {
   constructor(private au: AuthService,
     public alertController: AlertController,
     private route: Router,
-
+    private actionSheetController: ActionSheetController,
+    private modalController: ModalController
   ) {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     this.darkmode = prefersDark.matches;
@@ -168,7 +170,7 @@ export class Tab3Page {
 
   }
 
-  image(){
+  galeria(){
     this.au.takeGalley().then(res =>{
       let load = this.au.loading()
       this.au.uploadImgB64('user/'+this.usuario.telefono+'galery.jpg',res).then( url =>{
@@ -193,4 +195,49 @@ export class Tab3Page {
       }).catch(err => alert('error de upload'+err))
     }).catch(err =>alert(err))
   }
-}
+
+  eliminar(){
+    this.perfil=0
+  }
+
+  async funciones() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Foto de perfil',
+      buttons: [{
+        text: 'Eliminar foto',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          this.perfil = 0
+          console.log('Delete clicked');
+        }
+      }, {
+        text: 'Camara',
+        icon: 'camera',
+        handler: () => {
+          this.camara()
+          console.log('Share clicked');
+        }
+      },{
+        text: 'Galeria',
+        icon: 'image',
+        handler: () => {
+          this.galeria()
+          console.log('Play clicked');
+        }
+      },]
+    });
+    await actionSheet.present();
+  }
+
+  async modal(){
+   const modal= await this.modalController.create({
+      component: ModalperfilPage,
+      componentProps: {
+        image: this.urlfinal,
+        nombre:'omaro'
+      }
+    })
+    await modal.present()
+  }
+  }
