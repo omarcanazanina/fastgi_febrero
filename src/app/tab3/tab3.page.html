@@ -7,19 +7,63 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <br>
-  <ion-avatar (click)="modal()" class="perfil" *ngIf="perfil == 0">
+<ion-content>
+
+
+  <div class="profile" *ngIf="perfil == 0">
+    <ion-fab>
+      <ion-fab-button size="small" (click)="funciones()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <img (click)="modal()" src='../../assets/icon/default.jpg'>
+  </div>
+
+  <div class="profile" *ngIf="perfil == 1">
+    <ion-fab>
+      <ion-fab-button size="small" (click)="funciones()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <img (click)="modal()" [src]='urlfinal'>
+  </div>
+<!-- ================================================
+                  ESTO NO SIRVE ↓
+===================================================== -->
+  <!-- <ion-fab class="button-avatar">
+    <ion-fab-button size="small" (click)="funciones()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+  <!-- <ion-avatar (click)="modal()" class="perfil" *ngIf="perfil == 0">
+
+    <ion-fab class="button-avatar">
+      <ion-fab-button size="small" (click)="funciones()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
     <img src='../../assets/icon/default.jpg'>
-  </ion-avatar>
-  <ion-avatar  (click)="modal()"  class="perfil" *ngIf="perfil == 1">
+    <ion-fab style="padding-top: 25%; padding-left: 10%;" vertical="top" horizontal="center">
+      <ion-fab-button size="small"><ion-icon name="camera"></ion-icon></ion-fab-button>
+    </ion-fab>
+  </ion-avatar> -->
+
+  <!-- <ion-avatar (click)="modal()" class="perfil" *ngIf="perfil == 1">
     <img [src]='urlfinal'>
-  </ion-avatar>
-  <ion-item lines="none">
+    <ion-fab>
+      <ion-fab-button>
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-avatar> -->
+
+  <!-- <ion-item style="padding-top: 40px;" lines="none">
     <ion-button (click)="funciones()" class="boton">
       Funciones
     </ion-button>
-    <!-- 
+
       <ion-button class="boton" (click)="camara()">
         Camara
       </ion-button>
@@ -29,10 +73,11 @@
       <ion-button class="boton" (click)="galeria()">
         Galeria
       </ion-button>
-       -->
-
-  </ion-item>
-  <ion-list>
+  </ion-item> -->
+<!-- ================================================
+                  ESTO NO SIRVE ↑
+===================================================== -->
+  <ion-list style="padding-top: 10px;">
     <ion-item lines="none">
       <ion-icon slot='start' name="moon"></ion-icon>
       <ion-label> Modo oscuro</ion-label>

@@ -1,24 +1,48 @@
+.texto {
+  font-size: 40px;
+}
+.icono {
+  font-size: 170%;
+}
 
-.texto{
-    font-size: 40px;
+.boton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
-.icono{
-    font-size: 170%;
+.perfilprueba {
+  width: 80%;
+  height: 80%;
 }
 
-.perfil{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100px !important;
-    height: 100px !important;
+.perfil {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px !important;
+  height: 100px !important;
 }
-.boton{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+
+.button-avatar {
+  padding-top: 55px;
+  padding-left: 0px;
 }
-.perfilprueba{
-    width: 80%;
-    height: 80%;
+
+.profile {
+  width: 100%;
+  height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  ion-fab {
+    margin-left: 45px;
+    margin-top: 45px;
+  }
+  img {
+    height: 125px;
+    width: 125px;
+    border-radius: 50%;
+  }
 }
