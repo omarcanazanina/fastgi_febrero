@@ -1,17 +1,18 @@
 <ion-header>
-
   <ion-toolbar>
-    <ion-title>Perfil</ion-title>
+    <ion-item>
+      <ion-icon (click)="a()" name="arrow-back"></ion-icon>
+      <ion-title>Perfil</ion-title>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="a()">
-    Cerrar
-  </ion-button>
-  {{nombre}}
-  {{image}}
-  <div class="image">
-    <img [src]="image" alt="">
+  <div *ngIf="perfil == 0" class="image">
+    <img src="../../assets/icon/default.jpg">
   </div>
+  <div *ngIf="perfil == 1" class="image">
+    <img [src]='image'>
+  </div>
+
 </ion-content>

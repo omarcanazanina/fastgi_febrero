@@ -9,7 +9,7 @@ import { ModalController } from '@ionic/angular';
 export class ModalperfilPage implements OnInit {
 
   @Input() image;
-  @Input() nombre;
+  @Input() perfil;
   constructor(private modal:ModalController) { }
 
   ngOnInit() {

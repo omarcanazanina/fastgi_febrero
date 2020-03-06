@@ -235,7 +235,7 @@ export class Tab3Page {
       component: ModalperfilPage,
       componentProps: {
         image: this.urlfinal,
-        nombre:'omaro'
+        estado:this.perfil
       }
     })
     await modal.present()
