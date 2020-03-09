@@ -9,7 +9,16 @@
 
 <ion-content>
 
+  <div class="profile" >
+    <ion-fab>
+      <ion-fab-button size="small" (click)="funciones()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <img (click)="modal()" [src]='imm'>
+  </div>
 
+<!-- 
   <div class="profile" *ngIf="perfil == 0">
     <ion-fab>
       <ion-fab-button size="small" (click)="funciones()">
@@ -27,6 +36,8 @@
     </ion-fab>
     <img (click)="modal()" [src]='urlfinal'>
   </div>
+-->
+
 <!-- ================================================
                   ESTO NO SIRVE ↓
 ===================================================== -->
@@ -90,7 +101,7 @@
     <ion-item lines="none" *ngIf="controlnombre == 0 ">
       <ion-icon name="create" slot="end" (click)="editarnombre()"></ion-icon>
       <ion-icon name="person" slot="end"></ion-icon>
-      <p>Nombre</p>
+      <p class="p">Nombre</p>
     </ion-item>
     <ion-item lines="none" *ngIf="controlnombre == 1 ">
       <ion-icon name="create" slot="end" (click)="editarnombre()"></ion-icon>
@@ -100,7 +111,7 @@
     <ion-item lines="none" *ngIf="controlcorreo == 0 ">
       <ion-icon name="create" slot="end" (click)="editarcorreo()"></ion-icon>
       <ion-icon name="md-mail" slot="end"></ion-icon>
-      <p>Correo</p>
+      <p class="p">Correo</p>
     </ion-item>
     <ion-item lines="none" *ngIf="controlcorreo == 1 ">
       <ion-icon name="create" slot="end" (click)="editarcorreo()"></ion-icon>

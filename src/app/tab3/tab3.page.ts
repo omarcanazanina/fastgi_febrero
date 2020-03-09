@@ -14,8 +14,9 @@ export interface Image {
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  perfil=0
-  urlfinal:any
+  //imgbd:any
+  //perfil=0
+  urlfinal: any
   url: any;
   loading: boolean = false;
   darkmode: boolean = true;
@@ -36,7 +37,8 @@ export class Tab3Page {
     telefono: "",
     cajabancaria: "",
     uid: "",
-    codtel: ""
+    codtel: "",
+    img: ""
   }
 
   tarjetas: any = []
@@ -46,11 +48,15 @@ export class Tab3Page {
 
   controlnombre = 0
   controlcorreo = 0
+  nro_telefono: any
+  imm: any
   ngOnInit() {
     // this.uu = this.activate.snapshot.paramMap.get('id')
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
+      this.imm = this.usuario.img
+      //this.nro_telefono=this.usuario.telefono
       if (this.usuario.nombre != '') {
         this.controlnombre = 1
       }
@@ -170,34 +176,38 @@ export class Tab3Page {
 
   }
 
-  galeria(){
-    this.au.takeGalley().then(res =>{
+  galeria() {
+    this.au.takeGalley().then(res => {
       let load = this.au.loading()
-      this.au.uploadImgB64('user/'+this.usuario.telefono+'galery.jpg',res).then( url =>{
-        this.urlfinal=url
-        this.perfil=1
-        load.then(loading => {
-         loading.dismiss();
-       })
-      }).catch(err => alert('error de upload'+err))
-    }).catch(err =>alert(err))
-  }
-
-  camara(){
-    this.au.takecamera().then(res =>{
-      let load = this.au.loading()
-      this.au.uploadImgB64('user/'+this.usuario.telefono+'camara.jpg',res).then( url =>{
-        this.urlfinal=url
-        this.perfil=1
+      this.au.uploadImgB64('user/' + this.usuario.telefono + 'galery.jpg', res).then(url => {
+        this.urlfinal = url
+        // this.perfil=1
+        this.imm = this.au.actualizarimg({ img: url }, this.usuario.uid)
         load.then(loading => {
           loading.dismiss();
         })
-      }).catch(err => alert('error de upload'+err))
-    }).catch(err =>alert(err))
+      }).catch(err => alert('error de upload' + err))
+    }).catch(err => alert(err))
   }
 
-  eliminar(){
-    this.perfil=0
+  camara() {
+    this.au.takecamera().then(res => {
+      let load = this.au.loading()
+      this.au.uploadImgB64('user/' + this.usuario.telefono + 'camara.jpg', res).then(url => {
+        this.urlfinal = url
+        //this.perfil=1
+        this.imm = this.au.actualizarimg({ img: url }, this.usuario.uid)
+        load.then(loading => {
+          loading.dismiss();
+        })
+      }).catch(err => alert('error de upload' + err))
+    }).catch(err => alert(err))
+  }
+
+  eliminar() {
+    //this.perfil = 0
+    let url = 'https://firebasestorage.googleapis.com/v0/b/aplicacion-bdcf5.appspot.com/o/user%2Fdefault.jpg?alt=media&token=773dd56e-f796-41a1-8a85-d40fe7a9693e'
+    this.imm= this.au.actualizarimg({img:url}, this.usuario.uid)
   }
 
   async funciones() {
@@ -208,7 +218,8 @@ export class Tab3Page {
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-          this.perfil = 0
+         // this.perfil = 0
+         this.eliminar()
           console.log('Delete clicked');
         }
       }, {
@@ -218,7 +229,7 @@ export class Tab3Page {
           this.camara()
           console.log('Share clicked');
         }
-      },{
+      }, {
         text: 'Galeria',
         icon: 'image',
         handler: () => {
@@ -230,14 +241,16 @@ export class Tab3Page {
     await actionSheet.present();
   }
 
-  async modal(){
-   const modal= await this.modalController.create({
+  async modal() {
+    const modal = await this.modalController.create({
       component: ModalperfilPage,
       componentProps: {
-        image: this.urlfinal,
-        estado:this.perfil
+        image: this.imm,
+       // estado: this.perfil,
+        telefono: this.nro_telefono
       }
     })
     await modal.present()
   }
-  }
+
+}

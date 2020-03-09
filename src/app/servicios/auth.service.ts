@@ -929,6 +929,11 @@ takecamera(){
       return loading;
     }
 
+    
+    actualizarimg(image, id) {
+      return this.fire.collection('user').doc(id).set(image, { merge: true })
+    }
+  
 }
 
 

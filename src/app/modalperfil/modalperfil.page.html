@@ -1,18 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-item>
-      <ion-icon (click)="a()" name="arrow-back"></ion-icon>
-      <ion-title>Perfil</ion-title>
-    </ion-item>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div *ngIf="perfil == 0" class="image">
-    <img src="../../assets/icon/default.jpg">
-  </div>
-  <div *ngIf="perfil == 1" class="image">
+  <ion-item lines="none">
+    <ion-icon (click)="atras()" name="arrow-back"></ion-icon>
+    <ion-title>Perfil</ion-title>
+    <ion-icon (click)="funciones()" name="create"></ion-icon>
+  </ion-item>
+  
+
+  <div class="image">
     <img [src]='image'>
   </div>
+
 
 </ion-content>
