@@ -18,9 +18,16 @@ imagensita:any
     img:""
   }
   imm:any
+
+  sliderOpts ={
+    zoom: {
+      maxRatio: 5
+    }
+  }
   constructor(private modal:ModalController,
     private actionSheetController:ActionSheetController,
-    private au: AuthService) { }
+    private au: AuthService) { 
+    }
 
   ngOnInit() {
     this.uu = this.au.pruebita()
@@ -33,6 +40,7 @@ imagensita:any
   atras(){
     this.modal.dismiss()
   }
+  
 
   galeria(){
     this.au.takeGalley().then(res =>{
@@ -43,12 +51,13 @@ imagensita:any
         load.then(loading => {
          loading.dismiss();
        })
+       this.modal.dismiss()
       }).catch(err => alert('error de upload'+err))
     }).catch(err =>alert(err))
   }
 
   camara(){
-    this.au.takecamera().then(res =>{
+    this.au.takecamera().then(res =>{ 
       let load = this.au.loading()
       this.au.uploadImgB64('user/'+this.usuario.telefono+'camara.jpg',res).then( url =>{
         this.imagensita=url
@@ -56,6 +65,7 @@ imagensita:any
         load.then(loading => {
           loading.dismiss();
         })
+        this.modal.dismiss()
       }).catch(err => alert('error de upload'+err))
     }).catch(err =>alert(err))
   }
@@ -64,6 +74,7 @@ imagensita:any
     //this.perfil = 0
     let url = 'https://firebasestorage.googleapis.com/v0/b/aplicacion-bdcf5.appspot.com/o/user%2Fdefault.jpg?alt=media&token=773dd56e-f796-41a1-8a85-d40fe7a9693e'
     this.imm= this.au.actualizarimg({img:url}, this.usuario.uid)
+    this.modal.dismiss()
   }
 
   async funciones() {
@@ -95,5 +106,7 @@ imagensita:any
     });
     await actionSheet.present();
   }
+
+
 
 }

@@ -118,10 +118,15 @@
       <ion-icon name="md-mail" slot="end"></ion-icon>
       {{usuario.correo}}
     </ion-item>
-    <ion-item lines="none">
+    <ion-item lines="none" *ngIf="controladorpin == 0">
       <ion-icon name="create" slot="end" (click)='mod()'></ion-icon>
       <ion-icon name="unlock" slot="end"></ion-icon>
-      Pin
+      <p class="p">Pin</p>
+    </ion-item>
+    <ion-item lines="none" *ngIf="controladorpin != 0">
+      <ion-icon name="create" slot="end" (click)='mod()'></ion-icon>
+      <ion-icon name="unlock" slot="end"></ion-icon>
+      <p >Pin ••••</p>
     </ion-item>
     <ion-item lines="none" (click)=' cerrarsesion()'>
       <ion-icon name="md-log-in" slot="end"></ion-icon>
@@ -130,6 +135,13 @@
   </ion-list>
 
 
-
+<!-- 
+<ion-button (click)="captureImage()" expand="block" >
+  prueba
+</ion-button>
+<img [src]="myimage">
+<br>
+<img [src]="urlfinal" alt="">
+-->
 
 </ion-content>

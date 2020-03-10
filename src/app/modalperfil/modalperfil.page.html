@@ -6,9 +6,16 @@
   </ion-item>
   
 
-  <div class="image">
-    <img [src]='image'>
-  </div>
+<ion-slides [options]="sliderOpts" >
+  <ion-slide>
+    <div class="swiper-zoom-container"  >
+      <img [src]='image'>
+    </div>
+  </ion-slide>
+
+</ion-slides>
+  
+
 
 
 </ion-content>

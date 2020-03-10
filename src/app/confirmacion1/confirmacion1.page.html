@@ -1,4 +1,8 @@
 <ion-content >
+<div class="tr"> 
+  ASD
+</div>
+
   <ion-item lines="none">
     <ion-button slot="end" fill="clear" (click)="closeUsuario()">Cancelar</ion-button>
   </ion-item>
@@ -7,7 +11,7 @@
        definir texto con las variables
      <h4 class="text" text-center>Monto a transferir: {{monto}} Bs. a {{cobrador.nombre}}</h4>
      -->
-    <h4 class="text" text-center *ngIf="usuario_transferencia != ''">Monto a transferir: {{monto_transferencia}} Bs. as
+    <h4 class="text" text-center *ngIf="usuario_transferencia != ''">Monto a transferir: {{monto_transferencia}} Bs. a
       {{name_transferencia}}</h4>
     <h4 class="text" text-center *ngIf="usuario_conmonto != ''">Se pagara: {{monto_conmonto}} a
       {{name_conmonto}}</h4>

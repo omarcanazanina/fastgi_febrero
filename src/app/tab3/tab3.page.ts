@@ -3,6 +3,7 @@ import { AuthService } from '../servicios/auth.service';
 import { Router } from '@angular/router';
 import { AlertController, ActionSheetController, ModalController } from '@ionic/angular';
 import { ModalperfilPage } from '../modalperfil/modalperfil.page';
+import { Observable } from 'rxjs';
 export interface Image {
   id: string;
   image: string;
@@ -20,6 +21,7 @@ export class Tab3Page {
   url: any;
   loading: boolean = false;
   darkmode: boolean = true;
+  myimage  = null   
   constructor(private au: AuthService,
     public alertController: AlertController,
     private route: Router,
@@ -38,7 +40,8 @@ export class Tab3Page {
     cajabancaria: "",
     uid: "",
     codtel: "",
-    img: ""
+    img: "",
+    password:""
   }
 
   tarjetas: any = []
@@ -50,11 +53,14 @@ export class Tab3Page {
   controlcorreo = 0
   nro_telefono: any
   imm: any
+
+  controladorpin:any
   ngOnInit() {
     // this.uu = this.activate.snapshot.paramMap.get('id')
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
+      this.controladorpin = this.usuario.password
       this.imm = this.usuario.img
       //this.nro_telefono=this.usuario.telefono
       if (this.usuario.nombre != '') {
@@ -170,7 +176,6 @@ export class Tab3Page {
   }
 
   darktheme() {
-
     this.darkmode = !this.darkmode
     document.body.classList.toggle('dark')
 
@@ -181,6 +186,7 @@ export class Tab3Page {
       let load = this.au.loading()
       this.au.uploadImgB64('user/' + this.usuario.telefono + 'galery.jpg', res).then(url => {
         this.urlfinal = url
+        //this.au.reducirImagen(url).then( imgreducido =>{} )
         // this.perfil=1
         this.imm = this.au.actualizarimg({ img: url }, this.usuario.uid)
         load.then(loading => {
@@ -207,7 +213,7 @@ export class Tab3Page {
   eliminar() {
     //this.perfil = 0
     let url = 'https://firebasestorage.googleapis.com/v0/b/aplicacion-bdcf5.appspot.com/o/user%2Fdefault.jpg?alt=media&token=773dd56e-f796-41a1-8a85-d40fe7a9693e'
-    this.imm= this.au.actualizarimg({img:url}, this.usuario.uid)
+    this.imm = this.au.actualizarimg({ img: url }, this.usuario.uid)
   }
 
   async funciones() {
@@ -218,8 +224,8 @@ export class Tab3Page {
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-         // this.perfil = 0
-         this.eliminar()
+          // this.perfil = 0
+          this.eliminar()
           console.log('Delete clicked');
         }
       }, {
@@ -246,11 +252,38 @@ export class Tab3Page {
       component: ModalperfilPage,
       componentProps: {
         image: this.imm,
-       // estado: this.perfil,
+        // estado: this.perfil,
         telefono: this.nro_telefono
       }
     })
     await modal.present()
   }
 
-}
+  
+
+// //** recortar imagen**//
+// captureImage() {
+//   this.convertir('../../../assets/icon/vegeta.jpg').subscribe(base64 =>{
+//     this.myimage =base64
+//   })
+// }
+//
+// convertir(url: string) {
+//   return Observable.create(observer => {
+//     let xhr: XMLHttpRequest = new XMLHttpRequest();
+//     xhr.onload = function() {
+//       let reader: FileReader = new FileReader();
+//       reader.onloadend = function() {
+//         observer.next(observer.result);
+//         observer.complete();
+//       }
+//       reader.readAsDataURL(xhr.response)
+//     }
+//     xhr.open('GET', url);
+//     xhr.responseType = 'blob';
+//     xhr.send();
+//   })
+// }
+
+
+} 

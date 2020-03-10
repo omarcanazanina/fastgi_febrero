@@ -933,6 +933,56 @@ takecamera(){
     actualizarimg(image, id) {
       return this.fire.collection('user').doc(id).set(image, { merge: true })
     }
+//**  IMAGENES*/
+    //reducir imagen base64
+   reducirImagen(base64) {
+		return this.generateFromImage(base64, 600, 600, 1)
+			.then(data => {
+				//this.smallImg = data;
+				//this.smallSize = this.getImageSize(this.smallImg);
+				//return { base64: data, size: this.getImageSize(this.smallImg), blob: this.dataURLtoBlob(data) }
+        //return this.dataURLtoBlob(data)
+        return data
+			});
+  }
+  //imagen resize
+	 generateFromImage(img, MAX_WIDTH: number = 1025, MAX_HEIGHT: number = 1025, quality: number = 1): Promise<string> {
+		return new Promise((resolve, reject) => {
+
+			var canvas: any = document.createElement("canvas");
+			var image = new Image();
+
+			image.onload = () => {
+				var width = image.width;
+				var height = image.height;
+
+				if (width > height) {
+					if (width > MAX_WIDTH) {
+						height *= MAX_WIDTH / width;
+						width = MAX_WIDTH;
+					}
+				} else {
+					if (height > MAX_HEIGHT) {
+						width *= MAX_HEIGHT / height;
+						height = MAX_HEIGHT;
+					}
+				}
+				canvas.width = width;
+				canvas.height = height;
+				var ctx = canvas.getContext("2d");
+
+				ctx.drawImage(image, 0, 0, width, height);
+
+				// IMPORTANT: 'jpeg' NOT 'jpg'
+				var dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+				resolve(dataUrl)
+			}
+			image.src = img;
+		})
+  }
+  
+
   
 }
 
