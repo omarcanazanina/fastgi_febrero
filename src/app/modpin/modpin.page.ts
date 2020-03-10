@@ -50,9 +50,4 @@ export class ModpinPage implements OnInit {
     }
   }
   
-  volver(){
-    this.router.navigate(['tabs/tab3'])
-  }
-
-
 }
