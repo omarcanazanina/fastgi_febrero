@@ -233,7 +233,7 @@ export class AuthService {
     })
   }
   //no esta funcionando
-  crearcontel(uid: string, correo: string, password: number, nombre: string, codtel: string, telefono: string, cajainterna: number, token: string, estado: number,contacts:number) {
+  crearcontel(uid: string, correo: string, password: number, nombre: string, codtel: string, telefono: string, cajainterna: number, token: string, estado: number,contacts:number,img: string) {
     this.fire.collection('user').doc(uid).set({
       uid: uid,
       correo: correo,
@@ -244,7 +244,8 @@ export class AuthService {
       token: token,
       password: password,
       estado: estado,
-      contacts: contacts
+      contacts: contacts,
+      img:img
     })
   }
 
@@ -865,10 +866,9 @@ export class AuthService {
   }
 
   deletecontact(id,uid): Promise <void> {
-    return this.fire.collection('/user/'+id+'/contactos').doc(uid).delete()
+   return this.fire.collection('/user/'+id+'/contactos').doc(uid).delete()
+    //return this.fire.collection('/user/'+id+'/contactos').doc(uid).delete()
   }
-
-
 
 
 takecamera(){

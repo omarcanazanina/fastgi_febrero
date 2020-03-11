@@ -9,7 +9,9 @@
 </ion-header>
 
 <ion-content>
- {{cont}}
+ <ion-button (click)="actualizar1()" expand="block" >
+   Contactos
+ </ion-button>
   <ion-list>
     <ion-item *ngFor="let usu of todosdatosordenado| filtro: textoBuscar" lines="none" (click)="enviadatos(usu)">
         <ion-avatar item-start>
@@ -22,7 +24,6 @@
   </ion-list>
 <p>Invitar</p>
 
-{{cont1}}
   <ion-list>
     <ion-item *ngFor="let usu of todosdatosordenado1 | filtro: textoBuscar " lines="none">
         <ion-avatar item-start>

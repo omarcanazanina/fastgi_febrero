@@ -20,6 +20,7 @@ export class TelefonoPage implements OnInit {
   cajainterna = 0
   estado = 0
   contacts=0
+  img ='https://firebasestorage.googleapis.com/v0/b/aplicacion-bdcf5.appspot.com/o/user%2Fdefault.jpg?alt=media&token=773dd56e-f796-41a1-8a85-d40fe7a9693e'
   constructor(
     private route: Router,
     public navCtrl: NavController,
@@ -69,7 +70,7 @@ export class TelefonoPage implements OnInit {
                         .then((result) => {
                           let load = this.au.loadinginicio();
                           this.fcm.getToken().then(token => {
-                            this.au.crearcontel(result.user.uid, this.email, this.pin, this.nombre, codtel, phoneNumber1, this.cajainterna, token, this.estado,this.contacts)
+                            this.au.crearcontel(result.user.uid, this.email, this.pin, this.nombre, codtel, phoneNumber1, this.cajainterna, token, this.estado,this.contacts,this.img)
                             this.au.creocorrecto();
                             load.then(loading => {
                               loading.dismiss()
