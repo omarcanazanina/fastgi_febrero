@@ -9,9 +9,12 @@
 </ion-header>
 
 <ion-content>
- <ion-button (click)="actualizar1()" expand="block" >
+  <!-- 
+<ion-button (click)="actualizar1()" expand="block" >
    Contactos
  </ion-button>
+   -->
+ 
   <ion-list>
     <ion-item *ngFor="let usu of todosdatosordenado| filtro: textoBuscar" lines="none" (click)="enviadatos(usu)">
         <ion-avatar item-start>

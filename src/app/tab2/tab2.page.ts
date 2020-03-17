@@ -61,7 +61,7 @@ export class Tab2Page implements OnInit {
     pass: "",
     estado: "",
     token: "",
-    contacts:""
+    contacts: ""
   }
     ;
   lista: any;
@@ -189,9 +189,38 @@ export class Tab2Page implements OnInit {
     console.log(c);
     this.separado = this.cadena.substring(c + 1, this.cadena.length)
     console.log(this.separado);
-    
+
   }
 
+  guardarcontactos() {
+    console.log('contactos');
+    let options = {
+      filter: '',
+      multiple: true,
+      hasPhoneNumber: true
+    }
+    this.contactos.find(['*'], options).then((contactos: Contact[]) => {
+      const aux: any = []
+      for (let item of contactos) {
+        aux.push('nombre' + item.name.formatted, 'telefono' + this.au.codigo(item.phoneNumbers[0].value))
+      }
+      alert(JSON.stringify(aux))
+      this.fire.collection('/user/' + this.usuario.uid + '/contactostext').add({
+        key: 'contactstext',
+        value: JSON.stringify({
+          todo: aux
+        })
+      })
+      alert('se guardo todo')
+    })
+  }
+
+
+  jason(){
+    this.au.contactosprueba(this.usuario.uid).subscribe(dat =>{
+      const aaa = dat
+    })
+  } 
 }
 
 

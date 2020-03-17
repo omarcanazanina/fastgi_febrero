@@ -144,22 +144,20 @@ export class TransferenciasPage implements OnInit {
 
 
   actualizar1() {
+    this.au.deletecontactos(this.usuario.uid).then(res =>{
+      console.log('se elimino collection');
+      
+    }).catch(err=>{console.log('el error es ' + err)})
     //let load = this.presentLoading()
-    this.au.recuperarcontactos1(this.usuario.uid).subscribe(datos => {
-      console.log(datos);
-      let aux: any = []
-      datos.forEach((element: any) => {
-        aux.push(this.au.deletecontact(this.usuario.uid,element.id))
-      })
-      Promise.all(aux).then(da => {
-        console.log('termino de eliminar');
-       })
-
+        // this.au.recuperarcontactos1(this.usuario.uid).subscribe(datos => {
+        //   console.log(datos);
+        //
+        // })
  //    datos.forEach(element => {
  //      this.au.deletecontact(this.usuario.uid, element.id)
  //    });
  //    console.log('se termino de borrar');
-    })
+
 
 //   load.then(loading => {
 //     loading.dismiss();

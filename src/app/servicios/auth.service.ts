@@ -870,6 +870,11 @@ export class AuthService {
     //return this.fire.collection('/user/'+id+'/contactos').doc(uid).delete()
   }
 
+  deletecontactos(id): Promise <void> {
+    return this.fire.collection('/user/'+id).doc('contactos').delete()
+     //return this.fire.collection('/user/'+id+'/contactos').doc(uid).delete()
+   }
+
 
 takecamera(){
   const options: CameraOptions = {
@@ -982,6 +987,16 @@ takecamera(){
 		})
   }
   
+//
+  contactosprueba(uid:string) {
+    return this.fire.collection('/user/'+uid+'/contactostext').snapshotChanges().pipe(map(dat => {
+      return dat.map(a => {
+        const data = a.payload.doc.data() as usu;
+        data.id = a.payload.doc.id;
+        return data;
+      })
+    }))
+  }
 
   
 }
