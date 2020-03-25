@@ -78,10 +78,10 @@ export class PagarenviocobroPage implements OnInit {
       this.uu = this.au.pruebita();
       this.au.recuperaundato(this.uu).subscribe(usuario => {
         this.usuario = usuario;
-        let a= this.au.recupera_nombre_contacto(this.cobrador.telefono,this.usuario.uid).subscribe( nombredato =>{
-          this.nombrebd = nombredato[0].nombre
-          a.unsubscribe()
-        })
+      //  let a= this.au.recupera_nombre_contacto(this.cobrador.telefono,this.usuario.uid).subscribe( nombredato =>{
+      //    this.nombrebd = nombredato[0].nombre
+      //    a.unsubscribe()
+      //  })
         this.caja = parseFloat(this.usuario.cajainterna)
         this.caja1 = this.caja.toFixed(2)
         this.au.recuperacobrostransferencias(this.cobrador.uid, this.usuario.uid).subscribe(dat => {

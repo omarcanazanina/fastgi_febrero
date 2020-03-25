@@ -8,14 +8,6 @@
 </ion-header>
 
 <ion-content>
-  <!--
-   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
- -->
-<p *ngIf="c == 2">
-
-</p>
   <div *ngIf="c == 0">
     <p class="textito">Usted no tiene ninguna transacción</p><br>
     <p class="textito">Presionar el icono de la parte inferior para realizar transacciones</p>
@@ -41,20 +33,14 @@
         </ion-col>
         <!--
         <ion-col size="2">
-         
           <div *ngFor="let dato of badges">
             <h2>{{dato.a}}</h2>
           </div>
-
           <h1>{{datito}}a</h1>
-       
         </ion-col>
          -->
-
       </ion-row>
     </ion-grid>
-
-
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)='paso()'>
       <ion-fab-button>
         <ion-icon name="chatboxes"></ion-icon>
@@ -67,7 +53,7 @@
       Fastgi
     </ion-item>
     <ion-list>
-      <ion-item *ngFor="let usu of ContactsTrue | filtro2: textoBuscar " lines="none" (click)="enviadatos2(usu)">
+      <ion-item *ngFor="let usu of ContactsTrue | filtro: textoBuscar " lines="none" (click)="enviadatos2(usu)">
         <ion-avatar item-start>
           <img src="assets/svg/logo_contact.svg">
         </ion-avatar>
@@ -81,7 +67,7 @@
       Invitar amigos
     </ion-item>
     <ion-list>
-      <ion-item *ngFor="let u of ContactsNone | filtro2: textoBuscar  " lines="none">
+      <ion-item *ngFor="let u of ContactsNone | filtro: textoBuscar  " lines="none">
         <ion-avatar item-start>
           <ion-icon name="md-contact" size="large"></ion-icon>
         </ion-avatar>
@@ -94,31 +80,5 @@
       </ion-item>
     </ion-list>
   </div>
-
-  <!--
-  <ion-grid>
-    <ion-row>
-      <ion-col size="10">
-        <ion-item *ngFor="let usu of historial  | filtro1: textoBuscar ;let i = index" lines="none"
-          (click)="enviadatos(usu,i)">
-          <ion-avatar item-start>
-            <img src="assets/svg/logo_contact.svg">
-          </ion-avatar>
-          <ion-label class="label-alumnos">{{usu.formatted}}
-            <p>{{usu.telefono}}</p>
-          </ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col size="2">
-        <div *ngFor="let dato of badges">
-          <h2>{{dato.a}}</h2>
-        </div>
-        <h1> </h1>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
--->
-
-
 
 </ion-content>

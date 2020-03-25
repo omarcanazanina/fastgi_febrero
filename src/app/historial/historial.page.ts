@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
-import { Contacts, Contact } from '@ionic-native/contacts/ngx';
+import { Contacts } from '@ionic-native/contacts/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AngularFirestore } from 'angularfire2/firestore';
 @Component({
@@ -18,30 +18,24 @@ export class HistorialPage implements OnInit {
   }
   uu: any
   historial = []
-  cont: any
-
-  datos = []
-  textoBuscar = '' 
+  textoBuscar = ''
   c = 0
-  //para importar contactos
-  todosdatos
-  todosdatos1
+  contactstext = []
   ContactsNone = []
   ContactsTrue = []
   controlador = 0
-  //para los badges
   num = []
-  badge = 0
   idusuario: any
-  badges = []
   controladores: []
-  asd: []
-  datito
-  todos_contactos=[]
 
-
+  //cont: any
+  //datos = []
+  //para los badges
+  //badge = 0
+  //badges = []
   //
-  numeritos
+  //numeritos
+
   constructor(private router: Router,
     private au: AuthService,
     private route: Router,
@@ -52,19 +46,23 @@ export class HistorialPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.doRefresh(event)
     this.uu = this.au.pruebita();
     let h = this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
       this.idusuario = this.usuario.uid
 
-       this.au.ordenarcobrostransferencias(this.usuario.uid).subscribe(info => {
+      this.au.ordenarcobrostransferencias(this.usuario.uid).subscribe(info => {
         this.historial = info.filter((valor, indiceActual, arreglo) => arreglo.findIndex((item) => item.telefono === valor.telefono
         ) === indiceActual);
-
         console.log(this.historial);
-        
-        // cambiar estados1
+
+        if (this.historial.length > 0)
+          this.c = 1
+        this.importarcontactos()
+      })
+    })
+
+    // cambiar estados1
     //   this.historial.forEach(element => {
     //       this.au.recuperacobrostransferencias1(element.clave, this.usuario.uid, false).subscribe(datos => {
     //       this.controladores = datos 
@@ -72,53 +70,30 @@ export class HistorialPage implements OnInit {
     //       this.badges.push( {'a':numeritos} )
     //       //console.log(this.badges)
     //     })
-//
+    //
     //   });
-        // cambiar estados
-         this.historial.forEach(element => {
-           let a =this.au.recuperacobrostransferencias1(element.clave, this.usuario.uid, false).subscribe(datos => {
-             this.controladores = datos
-             this.numeritos = this.controladores.length
-             console.log('esta es la cantidad'+this.numeritos);
-             
-           // this.badges.push({ 'a': numeritos })
-           // console.log(this.badges)
-             a.unsubscribe()
-           })
-          })
-          
+    // cambiar estados
+    //  this.historial.forEach(element => {
+    //    let a = this.au.recuperacobrostransferencias1(element.clave, this.usuario.uid, false).subscribe(datos => {
+    //      this.controladores = datos
+    //      this.numeritos = this.controladores.length
+    //      console.log('esta es la cantidad' + this.numeritos);
+    //
+    //      // this.badges.push({ 'a': numeritos })
+    //      // console.log(this.badges)
+    //      a.unsubscribe()
+    //    })
+    //  })
+    // e.unsubscribe()
+    //funcion para filtro de busqueda
 
-        // e.unsubscribe()
-        //funcion para filtro de busqueda
-        if (this.historial.length > 0)
-          this.c = 1
 
-        // //importar contactos      
-        this.au.recuperarcontactos(this.usuario.uid, 1).subscribe(datos => {
-          this.todosdatos = datos
-          this.ContactsTrue = this.au.ordenarjson(this.todosdatos, 'nombre', 'asc')
-        })
-        this.au.recuperarcontactos(this.usuario.uid, 0).subscribe(datos => {
-          this.todosdatos1 = datos
-          this.ContactsNone = this.au.ordenarjson(this.todosdatos1, 'nombre', 'asc')
-         })
-      })
-            //h.unsubscribe()
-    })
-  
   }
   codigo(num) {
     let nuevo = num.replace("+591", "").trim()
     return nuevo
   }
 
-  // doRefresh(event) {
-  //   console.log('Begin async operation');
-  //   setTimeout(() => {
-  //     console.log('Async operation has ended');
-  //     event.target.complete();
-  //   }, 2000);
-  // }
   BuscarHistorial(event) {
     this.textoBuscar = event.target.value;
     if (this.textoBuscar != '') {
@@ -135,17 +110,17 @@ export class HistorialPage implements OnInit {
   }
 
   enviadatos(usu) {
-   // this.datito=this.badges[i] = 0
+    // this.datito=this.badges[i] = 0
     this.route.navigate(['pagarenviocobro', usu.telefono, usu.formatted])
-//   let aux: any = []
-//   this.controladores.forEach((element: any) => {
-//     aux.push(this.au.actualizaestados({ estado: true }, element.id, this.usuario.uid))
-//   })
-//   Promise.all(aux).then(da => {
-//   //  console.log('termino de actualizar estados');
-//     console.log(i);
+    //   let aux: any = []
+    //   this.controladores.forEach((element: any) => {
+    //     aux.push(this.au.actualizaestados({ estado: true }, element.id, this.usuario.uid))
+    //   })
+    //   Promise.all(aux).then(da => {
+    //   //  console.log('termino de actualizar estados');
+    //     console.log(i);
 
-//    })
+    //    })
     //this.au.recuperacobrostransferencias1(usu.clave,this.usuario.uid,false).subscribe (datos =>{
     //  datos.forEach(element => {
     //    console.log(element);
@@ -172,5 +147,20 @@ export class HistorialPage implements OnInit {
     });
   }
 
-
+  importarcontactos() {
+    this.au.contactosprueba(this.usuario.uid).subscribe(dat => {
+      const a = JSON.parse(dat[0].value)
+      this.contactstext = a.todo
+      const order = this.au.ordenarjson(this.contactstext, 'nombre', 'asc')
+      order.forEach(element => {
+        this.au.verificausuarioActivo(element.telefono).subscribe(res => {
+          if (res.length > 0) {
+            this.ContactsTrue.push(element)
+          } else {
+            this.ContactsNone.push(element)
+          }
+        })
+      });
+    })
+  }
 }

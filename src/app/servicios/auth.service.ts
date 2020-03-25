@@ -838,26 +838,27 @@ export class AuthService {
     return this.fire.collection('/user/' + idusuario + '/cobrostransferencias').doc(id).set(estado, { merge: true })
   }
 
-  //listar contactos de la BD
-  recuperarcontactos1(uid:string) {
-    return this.fire.collection('/user/'+uid+'/contactos').snapshotChanges().pipe(map(dat => {
-      return dat.map(a => {
-        const data = a.payload.doc.data() as usu;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }))
-  }
-  recuperarcontactos(id, estado): Observable<any> {
-    var query = ref => ref.where('estado', '==', estado)
-    return this.fire.collection('/user/' + id + '/contactos', query).snapshotChanges().pipe(map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as usu;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }))
-  }
+//Ya no usado
+// //listar contactos de la BD
+// recuperarcontactos1(uid:string) {
+//   return this.fire.collection('/user/'+uid+'/contactos').snapshotChanges().pipe(map(dat => {
+//     return dat.map(a => {
+//       const data = a.payload.doc.data() as usu;
+//       data.id = a.payload.doc.id;
+//       return data;
+//     })
+//   }))
+// }
+// recuperarcontactos(id, estado): Observable<any> {
+//   var query = ref => ref.where('estado', '==', estado)
+//   return this.fire.collection('/user/' + id + '/contactos', query).snapshotChanges().pipe(map(changes => {
+//     return changes.map(a => {
+//       const data = a.payload.doc.data() as usu;
+//       data.id = a.payload.doc.id;
+//       return data;
+//     })
+//   }))
+// }
 
   actualizarcontacts(contacts, id) {
     return this.fire.collection('user').doc(id).set(contacts, { merge: true })

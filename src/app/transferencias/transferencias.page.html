@@ -10,8 +10,8 @@
 
 <ion-content>
 
-<ion-button (click)="updatecontacts()" expand="block" >
-   actualizar
+<ion-button (click)="updatecontacts()" expand="block" fill="clear">
+   actualizar contactos
  </ion-button>
    
  <!-- listar lo q sirve -->
@@ -40,38 +40,4 @@
         </ion-button>
     </ion-item>
   </ion-list>
-
-
- 
 </ion-content>
-
-<!--
-
-  <ion-list>
-    <ion-item *ngFor="let usu of ContactsTrue | filtro: textoBuscar" lines="none" (click)="enviadatos(usu)">
-      <ion-avatar item-start>
-        <img src="assets/svg/logo_contact.svg" >
-      </ion-avatar>
-      <ion-label class="label-alumnos"> {{usu.name.formatted}}
-        <p> {{usu.phoneNumbers[0].value}} </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
-  <ion-item>
-    Invitar amigos
-  </ion-item>
-  <ion-list>
-    <ion-item *ngFor="let u of ContactsNone | filtro: textoBuscar" lines="none">
-      <ion-avatar item-start>
-        <ion-icon name="md-contact" size="large"></ion-icon>
-      </ion-avatar>
-      <ion-label class="label-alumnos"> {{u.name.formatted}}
-        <p>{{u.phoneNumbers[0].value}}</p>
-      </ion-label>
-      <ion-button (click)="invitar()" slot="end" shape="round">
-        Invitar
-      </ion-button>
-    </ion-item>
-  </ion-list>
-  -->
