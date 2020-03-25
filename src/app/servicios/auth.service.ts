@@ -547,7 +547,7 @@ export class AuthService {
   async updatecontacts() {
     const toast = await this.toastController.create({
       message: 'Se actualizó tu lista de contactos.',
-      duration: 4000,
+      duration: 3000,
       position: 'top'
     });
     toast.present();
