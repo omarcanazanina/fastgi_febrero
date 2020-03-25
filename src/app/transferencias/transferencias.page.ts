@@ -100,7 +100,7 @@ export class TransferenciasPage implements OnInit {
       const contact = res[0].id
       this.au.deletecontact(this.usuario.uid, contact).then(dat => {
         this.au.guardarcontactos(this.usuario.uid)
-        alert('se termino de actualizar')
+        this.au.updatecontacts()
         this.route.navigate(['/tabs/historial'])
       })
     })

@@ -543,6 +543,15 @@ export class AuthService {
     });
     await alert.present();
   }
+  //alertas actualizo contactos
+  async updatecontacts() {
+    const toast = await this.toastController.create({
+      message: 'Se actualizó tu lista de contactos.',
+      duration: 4000,
+      position: 'top'
+    });
+    toast.present();
+  }
 
   //tarjeta registrada
   async cargocontarjeta(monto, usu) {
@@ -837,28 +846,6 @@ export class AuthService {
   actualizaestados(estado, id,idusuario) {
     return this.fire.collection('/user/' + idusuario + '/cobrostransferencias').doc(id).set(estado, { merge: true })
   }
-
-//Ya no usado
-// //listar contactos de la BD
-// recuperarcontactos1(uid:string) {
-//   return this.fire.collection('/user/'+uid+'/contactos').snapshotChanges().pipe(map(dat => {
-//     return dat.map(a => {
-//       const data = a.payload.doc.data() as usu;
-//       data.id = a.payload.doc.id;
-//       return data;
-//     })
-//   }))
-// }
-// recuperarcontactos(id, estado): Observable<any> {
-//   var query = ref => ref.where('estado', '==', estado)
-//   return this.fire.collection('/user/' + id + '/contactos', query).snapshotChanges().pipe(map(changes => {
-//     return changes.map(a => {
-//       const data = a.payload.doc.data() as usu;
-//       data.id = a.payload.doc.id;
-//       return data;
-//     })
-//   }))
-// }
 
   actualizarcontacts(contacts, id) {
     return this.fire.collection('user').doc(id).set(contacts, { merge: true })
