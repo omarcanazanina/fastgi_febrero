@@ -9,14 +9,14 @@
 </ion-header>
 
 <ion-content>
-  <!-- 
-<ion-button (click)="actualizar1()" expand="block" >
-   Contactos
+
+<ion-button (click)="updatecontacts()" expand="block" >
+   actualizar
  </ion-button>
-   -->
- 
+   
+ <!-- listar lo q sirve -->
   <ion-list>
-    <ion-item *ngFor="let usu of todosdatosordenado| filtro: textoBuscar" lines="none" (click)="enviadatos(usu)">
+    <ion-item *ngFor="let usu of contactstexttrue| filtro: textoBuscar" lines="none" (click)="enviadatos(usu)">
         <ion-avatar item-start>
           <img src="assets/svg/logo_contact.svg">
         </ion-avatar>
@@ -28,7 +28,7 @@
 <p>Invitar</p>
 
   <ion-list>
-    <ion-item *ngFor="let usu of todosdatosordenado1 | filtro: textoBuscar " lines="none">
+    <ion-item *ngFor="let usu of contactstextnone | filtro: textoBuscar " lines="none">
         <ion-avatar item-start>
           <ion-icon name="md-contact" size="large"></ion-icon>
         </ion-avatar>
@@ -40,7 +40,12 @@
         </ion-button>
     </ion-item>
   </ion-list>
- <!--
+
+
+ 
+</ion-content>
+
+<!--
 
   <ion-list>
     <ion-item *ngFor="let usu of ContactsTrue | filtro: textoBuscar" lines="none" (click)="enviadatos(usu)">
@@ -70,4 +75,3 @@
     </ion-item>
   </ion-list>
   -->
-</ion-content>

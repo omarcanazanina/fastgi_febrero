@@ -200,7 +200,9 @@ export class PagarenviocobroPage implements OnInit {
             cobrador_transferencia: this.cobrador,
             monto_transferencia: this.pin,
             detalle_transferencia: detalle,
-            name_transferencia: this.nombrebd
+            name_transferencia : this.nombresito,
+            nro_transferencia : this.numero
+            //name_transferencia: this.nombrebd
           }
         });
         modal.present();

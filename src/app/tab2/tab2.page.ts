@@ -82,7 +82,7 @@ export class Tab2Page implements OnInit {
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
-      this.guardar_contactos()
+     // this.guardar_contactos()
       this.cerrarsesionotro()
       //if (this.Platform.is('ios')) {
       //  this.au.recuperaundato('AstYEx3dWlZvtLZdREpi1DhRkYj1').subscribe(usuario => {
@@ -193,34 +193,53 @@ export class Tab2Page implements OnInit {
   }
 
   guardarcontactos() {
-    console.log('contactos');
-    let options = {
-      filter: '',
-      multiple: true,
-      hasPhoneNumber: true
-    }
-    this.contactos.find(['*'], options).then((contactos: Contact[]) => {
-      const aux: any = []
-      for (let item of contactos) {
-        aux.push('nombre' + item.name.formatted, 'telefono' + this.au.codigo(item.phoneNumbers[0].value))
-      }
-      alert(JSON.stringify(aux))
-      this.fire.collection('/user/' + this.usuario.uid + '/contactostext').add({
-        key: 'contactstext',
-        value: JSON.stringify({
-          todo: aux
-        })
-      })
-      alert('se guardo todo')
-    })
+    this.au.guardarcontactos(this.usuario.uid)
+  //  console.log('contactos');
+  //  let options = {
+  //    filter: '',
+  //    multiple: true,
+  //    hasPhoneNumber: true
+  //  }
+  //  this.contactos.find(['*'], options).then((contactos: Contact[]) => {
+  //    const aux: any = []
+  //    for (let item of contactos) {
+  //      aux.push({'nombre': item.name.formatted , 'telefono' : this.au.codigo(item.phoneNumbers[0].value)})
+  //    }
+  //    alert(JSON.stringify(aux))
+  //    this.fire.collection('/user/' + this.usuario.uid + '/contactostext').add({
+  //      key: 'contactstext',
+  //      value: JSON.stringify({
+  //        todo: aux
+  //      })
+  //    })
+//
+  //  })
   }
 
 
   jason(){
     this.au.contactosprueba(this.usuario.uid).subscribe(dat =>{
-      const aaa = dat
+      const a  = JSON.parse(dat[0].value)
+     // console.log(a.todo[0].nombre);
+      const b = a.todo
+      for (let i = 0; i < b.length; i++) {
+        const element = b[i];
+      if(element.telefono == '72990653'){
+        console.log('es este'+ JSON.stringify(element));
+      }
+      }
     })
   } 
+
+  eliminar(){
+    this.au.contactosprueba(this.usuario.uid).subscribe(res =>{
+      const contact = res[0].id
+      this.au.deletecontact(this.usuario.uid,contact).then(dat =>{
+        console.log('se elimino');
+      })
+    })
+   // this.au.deletecontact(this.usuario.uid,)
+  }
 }
 
 

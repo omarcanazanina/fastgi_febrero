@@ -10,6 +10,13 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';
 
+import { Contacts, Contact } from '@ionic-native/contacts/ngx';
+export interface json {
+  id: string
+  nombre: string
+  key:string
+  value:string
+}
 
 export interface usu {
   cuenta: string;
@@ -79,7 +86,8 @@ export class AuthService {
     private emailComposer: EmailComposer,
     private loadingController: LoadingController,
     private camera: Camera,
-    private afStorage:AngularFireStorage
+    private afStorage:AngularFireStorage,
+    private contactos: Contacts
   ) { }
 
 
@@ -866,14 +874,8 @@ export class AuthService {
   }
 
   deletecontact(id,uid): Promise <void> {
-   return this.fire.collection('/user/'+id+'/contactos').doc(uid).delete()
-    //return this.fire.collection('/user/'+id+'/contactos').doc(uid).delete()
+   return this.fire.collection('/user/'+id+'/contactostext').doc(uid).delete()
   }
-
-  deletecontactos(id): Promise <void> {
-    return this.fire.collection('/user/'+id).doc('contactos').delete()
-     //return this.fire.collection('/user/'+id+'/contactos').doc(uid).delete()
-   }
 
 
 takecamera(){
@@ -986,17 +988,58 @@ takecamera(){
 			image.src = img;
 		})
   }
-  
+  //guardar contactos en text
+
+  guardarcontactos(id_usuario) {
+    let options = {
+      filter: '',
+      multiple: true,
+      hasPhoneNumber: true
+    }
+    this.contactos.find(['*'], options).then((contactos: Contact[]) => {
+      const aux: any = []
+      for (let item of contactos) {
+        aux.push({'nombre': item.name.formatted , 'telefono' : this.codigo(item.phoneNumbers[0].value)})
+      }
+      this.fire.collection('/user/' + id_usuario + '/contactostext').add({
+        key: 'contactstext',
+        value: JSON.stringify({
+          todo: aux
+        })
+      })
+
+    })
+  }
+
+
+
 //
   contactosprueba(uid:string) {
     return this.fire.collection('/user/'+uid+'/contactostext').snapshotChanges().pipe(map(dat => {
       return dat.map(a => {
-        const data = a.payload.doc.data() as usu;
+        const data = a.payload.doc.data() as json;
         data.id = a.payload.doc.id;
         return data;
       })
     }))
   }
+  
+
+// recuperar nombres de =l contactostext
+  recupera_nombre_contactstext(usuario_id, nro_telefono){
+  return  this.contactosprueba(usuario_id).subscribe(dat =>{
+      const a  = JSON.parse(dat[0].value)
+      const b = a.todo
+      for (let i = 0; i < b.length; i++) {
+        const element = b[i];
+      if(element.telefono == nro_telefono){
+       
+        console.log('es este'+ JSON.stringify(element));
+        return element.nombre
+      }
+      }
+    })
+  } 
 
   
 }

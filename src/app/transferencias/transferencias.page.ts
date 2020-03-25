@@ -38,13 +38,18 @@ export class TransferenciasPage implements OnInit {
   contactos2: any = []
   sicontact: any = []
   nocontact: any = []
+  //contactos text
+  contactstext = []
+  contactstexttrue = []
+  contactstextnone = []
+  //
   constructor(private au: AuthService,
     private contactos: Contacts,
     public loadingController: LoadingController,
     private route: Router,
     private socialShare: SocialSharing,
     public fire: AngularFirestore,
-    private storage:Storage
+    private storage: Storage
   ) {
     //this.loadContacts()
   }
@@ -59,6 +64,7 @@ export class TransferenciasPage implements OnInit {
       this.usuario = usuario;
       // this.listar_contactos()
       this.listar()
+      this.listarcontactos()
     })
 
   }
@@ -79,34 +85,7 @@ export class TransferenciasPage implements OnInit {
       loading.dismiss();
     })
   }
-  //otro metodo para import contactos
-  //loadContacts() {
-  //  let load = this.presentLoading()
-  //  let options = {
-  //    filter: '',
-  //    multiple: true,
-  //    hasPhoneNumber: true
-  //  }
-  //  this.contactos.find(['*'], options).then((contactos: Contact[]) => {
-  //    for (let item of contactos) {
-  //    this.todosdatos.push({'nombre':item.name.formatted},{'numero':item.phoneNumbers[0].value})
-  //    alert(JSON.stringify(this.todosdatos))
-  //      if (item.phoneNumbers) {
-  //        this.au.verificausuarioActivo(this.codigo(item.phoneNumbers[0].value))
-  //          .subscribe(resp => {
-  //            if (resp.length > 0) {
-  //              this.ContactsTrue.push(item)
-  //            } else {
-  //              this.ContactsNone.push(item)
-  //            }
-  //          })
-  //      }
-  //    }
-  //    load.then(loading => {
-  //      loading.dismiss();
-  //    })
-  //  })
-  //}
+
 
 
   codigo(num) {
@@ -138,49 +117,36 @@ export class TransferenciasPage implements OnInit {
     });
   }
 
-  actualizar() {
-
+  listarcontactos() {
+    this.au.contactosprueba(this.usuario.uid).subscribe(dat => {
+      const a = JSON.parse(dat[0].value)
+      //const ordenado = this.au.ordenarjson(a,'nombre','asc')
+      // console.log(a.todo[0].nombre);
+      this.contactstext = a.todo
+      this.contactstext.forEach(element => {
+        this.au.verificausuarioActivo(element.telefono).subscribe(res => {
+          if (res.length > 0) {
+            this.contactstexttrue.push(element)
+          } else {
+            this.contactstextnone.push(element)
+          }
+        })
+      });
+     // console.log(this.contactstexttrue);
+     // const ordenado = this.au.ordenarjson(this.contactstexttrue,'nombre','asc')
+     // console.log(ordenado);
+    })
   }
 
-
-  actualizar1() {
-    this.au.deletecontactos(this.usuario.uid).then(res =>{
-      console.log('se elimino collection');
-      
-    }).catch(err=>{console.log('el error es ' + err)})
-    //let load = this.presentLoading()
-        // this.au.recuperarcontactos1(this.usuario.uid).subscribe(datos => {
-        //   console.log(datos);
-        //
-        // })
- //    datos.forEach(element => {
- //      this.au.deletecontact(this.usuario.uid, element.id)
- //    });
- //    console.log('se termino de borrar');
-
-
-//   load.then(loading => {
-//     loading.dismiss();
-//   })
-    //  let options = {
-    //    filter: '',
-    //    multiple: true,
-    //    hasPhoneNumber: true
-    //  }
-    //  this.contactos.find(['*'], options).then((contactos: Contact[]) => {
-    //    for (let item of contactos) {
-    //      this.au.verificausuarioActivo(this.au.codigo(item.phoneNumbers[0].value)).subscribe(resp => {
-    //        this.contactos2=resp
-    //        if (this.contactos2.length > 0) {
-    //          this.contactos1.push({ 'nombre': item.name.formatted, 'numero': item.phoneNumbers[0].value, 'estado': 1 })
-    //        } else {
-    //          this.contactos1.push({ 'nombre': item.name.formatted, 'numero': item.phoneNumbers[0].value, 'estado': 0 })
-    //        }
-    //          this.sicontact = this.au.ordenarjson(this.contactos1,'nombre','asc')
-    //          alert(JSON.stringify(this.sicontact))
-    //      })
-    //    }
-    //  })
+  updatecontacts() {
+    this.au.contactosprueba(this.usuario.uid).subscribe(res => {
+      const contact = res[0].id
+      this.au.deletecontact(this.usuario.uid, contact).then(dat => {
+        this.au.guardarcontactos(this.usuario.uid)
+        alert('se termino de actualizar')
+        this.route.navigate(['/tabs/historial'])
+      })
+    })
 
   }
 }
