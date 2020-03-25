@@ -1,83 +1,44 @@
-<ion-content >
-  <ion-card class="contenedor" (click)="label()">
-    <ion-label slot="end" class="text" (click)="closeUsuario()">Cancelar</ion-label>
+<ion-content>
+  <ion-header class="ion-padding">
+    <ion-toolbar>
+      <ion-icon size="large" slot="end" color="primary" name="close-circle-outline" (click)="closeUsuario()"></ion-icon>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card color="success" class="contenedor" (click)="label()">
+    <!-- <ion-label slot="end" class="text" (click)="closeUsuario()">Cancelar</ion-label> -->
     <h4 class="text" text-center *ngIf="usuario_transferencia != ''">Monto a transferir: {{monto_transferencia}} Bs. a
       {{name_transferencia}}</h4>
     <h4 class="text" text-center *ngIf="usuario_conmonto != ''">Se pagara: {{monto_conmonto}} a
       {{name_conmonto}}</h4>
     <h4 class="text" text-center *ngIf="usuario_sinmonto != ''">Se pagara: {{monto_sinmonto}} Bs. a
       {{name_sinmonto}} </h4>
-    <h4 class="text" text-center *ngIf="usuario_pagodeuda != ''">Monto a pagar: {{usu_pagodeuda.monto}} Bs. </h4>
+    <h4 class="text" text-center *ngIf="usuario_pagodeuda != ''">Monto a pagar: {{usu_pagodeuda.monto}} Bs.</h4>
 
-    <ion-item *ngIf="pin == '' && controladorteclado == 1">
+    <div *ngIf="pin == '' && controladorteclado == 1">
       <ion-item class="pin">
-        PIN.{{pin}} <p class="parpadea"> |</p>
+        PIN: {{pin}} <p class="parpadea"> |</p>
       </ion-item>
-    </ion-item>
+    </div>
 
-    <ion-item *ngIf="pin != '' && controladorteclado == 1">
+    <div *ngIf="pin != '' && controladorteclado == 1">
       <ion-item class="pin">
-        PIN.{{pin}} <p class="parpadea"> |</p>
+        PIN: {{pin}} <p class="parpadea"> |</p>
       </ion-item>
-    </ion-item>
+    </div>
 
-    <ion-item *ngIf="pin != '' && controladorteclado == 0">
+    <div *ngIf="pin != '' && controladorteclado == 0">
       <ion-item class="pin">
-        PIN.{{pin}}
+        PIN: {{pin}}
       </ion-item>
-    </ion-item>
+    </div>
 
-    <ion-item *ngIf="pin == '' && controladorteclado == 0">
+    <div *ngIf="pin == '' && controladorteclado == 0">
       <ion-item class="pin">
-        PIN.{{pin}}
+        PIN: {{pin}}
       </ion-item>
-    </ion-item>
+    </div>
   </ion-card>
 
-  <!--
- <div class="div1" *ngIf="controladorteclado == 1">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="9">
-          <ion-button color="light" *ngFor="let n of gruponum" (click)="presionar(n)" class="botones">{{n}}
-          </ion-button>
-          <ion-button  class="imagen1" (click)="ocultar()">
-            <ion-img src="./assets/icon/teclado.svg" class="imagen"></ion-img>
-          </ion-button>
-        </ion-col>
-        <ion-col size="3">
-          <ion-button  class="borrar" (click)="borrar()">
-            <ion-img src="./assets/icon/retroceso.svg" class="imagen"></ion-img>
-          </ion-button>
-          <ion-button class="ok" (click)="funciones(pin)">ok</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-
-
- 
-
-  <div class="keyboard" *ngIf="controladorteclado == 1">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="9" class="box">
-            <ion-button color="light" *ngFor="let n of gruponum" (click)="presionar(n)"  class="btn">{{n}}
-            </ion-button>
-            <ion-button class="btn-ocultar"  (click)="ocultar()">
-              <ion-img src="./assets/icon/teclado.svg" class="imagen"></ion-img>
-            </ion-button>
-        </ion-col>
-        <ion-col size="3" class="box">
-            <ion-button class="btn-borrar"  (click)="borrar()">
-              <ion-img src="./assets/icon/retroceso.svg" class="imagen"></ion-img>
-            </ion-button>
-            <ion-button class="btn-ok"  (click)="funciones()">OK</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
--->
   <div class="keyboard" *ngIf="controladorteclado == 1">
     <ion-grid>
       <ion-row>
