@@ -37,6 +37,7 @@
     "@ionic/storage": "^2.2.0",
     "angular2-text-mask": "^9.0.0",
     "angularfire2": "^5.2.1",
+    "build": "0.1.4",
     "cordova-android": "^8.1.0",
     "cordova-base64-to-gallery": "^2.0.2",
     "cordova-ios": "^5.1.1",

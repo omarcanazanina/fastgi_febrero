@@ -16,6 +16,8 @@ import { Contacts, Contact } from '@ionic-native/contacts/ngx';
 })
 
 export class Tab2Page implements OnInit {
+  controlador=0
+
   gruponum = [7, 8, 9, 4, 5, 6, 1, 2, 3, '.', 0, 'v']
   cont1 = 0
   pin = ""
@@ -82,7 +84,7 @@ export class Tab2Page implements OnInit {
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
-     // this.guardar_contactos()
+     // this.au.guardarcontactos(this.usuario.uid)
       this.cerrarsesionotro()
       //if (this.Platform.is('ios')) {
       //  this.au.recuperaundato('AstYEx3dWlZvtLZdREpi1DhRkYj1').subscribe(usuario => {
@@ -94,10 +96,6 @@ export class Tab2Page implements OnInit {
       //  
       //}
     })
-
-    //prueba de ordenar json
-    //this.ordenado = this.au.ordenarjson(this.vegetales, "nombre", "desc")
-    //console.log(this.ordenado);
 
   }
   // funcion para cerrar la sesion de otro dispositivo
@@ -152,37 +150,37 @@ export class Tab2Page implements OnInit {
 
 
   //guardar contactos en la BD
-  guardar_contactos() {
-    if (parseInt(this.usuario.contacts) == 0) {
-      let options = {
-        filter: '',
-        multiple: true,
-        hasPhoneNumber: true
-      }
-      this.contactos.find(['*'], options).then((contactos: Contact[]) => {
-        for (let item of contactos) {
-          this.au.verificausuarioActivo(this.au.codigo(item.phoneNumbers[0].value)).subscribe(resp => {
-            if (resp.length > 0) {
-              this.fire.collection('/user/' + this.usuario.uid + '/contactos').add({
-                nombre: item.name.formatted,
-                telefono: this.au.codigo(item.phoneNumbers[0].value),
-                estado: 1
-              })
-            } else {
-              this.fire.collection('/user/' + this.usuario.uid + '/contactos').add({
-                nombre: item.name.formatted,
-                telefono: this.au.codigo(item.phoneNumbers[0].value),
-                estado: 0
-              })
-            }
-          })
-
-        }
-        this.au.actualizarcontacts({ contacts: 1 }, this.usuario.uid);
-      })
-    } else {
-    }
-  }
+// guardar_contactos() {
+//   if (parseInt(this.usuario.contacts) == 0) {
+//     let options = {
+//       filter: '',
+//       multiple: true,
+//       hasPhoneNumber: true
+//     }
+//     this.contactos.find(['*'], options).then((contactos: Contact[]) => {
+//       for (let item of contactos) {
+//         this.au.verificausuarioActivo(this.au.codigo(item.phoneNumbers[0].value)).subscribe(resp => {
+//           if (resp.length > 0) {
+//             this.fire.collection('/user/' + this.usuario.uid + '/contactos').add({
+//               nombre: item.name.formatted,
+//               telefono: this.au.codigo(item.phoneNumbers[0].value),
+//               estado: 1
+//             })
+//           } else {
+//             this.fire.collection('/user/' + this.usuario.uid + '/contactos').add({
+//               nombre: item.name.formatted,
+//               telefono: this.au.codigo(item.phoneNumbers[0].value),
+//               estado: 0
+//             })
+//           }
+//         })
+//
+//       }
+//       this.au.actualizarcontacts({ contacts: 1 }, this.usuario.uid);
+//     })
+//   } else {
+//   }
+// }
 
   funcion() {
     let c = this.cadena.indexOf('.')
@@ -192,30 +190,34 @@ export class Tab2Page implements OnInit {
 
   }
 
-  guardarcontactos() {
-    this.au.guardarcontactos(this.usuario.uid)
-  //  console.log('contactos');
-  //  let options = {
-  //    filter: '',
-  //    multiple: true,
-  //    hasPhoneNumber: true
-  //  }
-  //  this.contactos.find(['*'], options).then((contactos: Contact[]) => {
-  //    const aux: any = []
-  //    for (let item of contactos) {
-  //      aux.push({'nombre': item.name.formatted , 'telefono' : this.au.codigo(item.phoneNumbers[0].value)})
-  //    }
-  //    alert(JSON.stringify(aux))
-  //    this.fire.collection('/user/' + this.usuario.uid + '/contactostext').add({
-  //      key: 'contactstext',
-  //      value: JSON.stringify({
-  //        todo: aux
-  //      })
-  //    })
-//
-  //  })
-  }
+ guardarcontactos() {
+   if(parseInt(this.usuario.contacts) == 0){
 
+    this.au.guardarcontactos(this.usuario.uid)
+    this.controlador =1
+   }else{
+
+   }
+//  // let options = {
+//  //   filter: '',
+//  //   multiple: true,
+//  //   hasPhoneNumber: true
+//  // }
+//  // this.contactos.find(['*'], options).then((contactos: Contact[]) => {
+//  //   const aux: any = []
+//  //   for (let item of contactos) {
+//  //     aux.push({'nombre': item.name.formatted , 'telefono' : this.au.codigo(item.phoneNumbers[0].value)})
+//  //   }
+//  //   alert(JSON.stringify(aux))
+//  //   this.fire.collection('/user/' + this.usuario.uid + '/contactostext').add({
+//  //     key: 'contactstext',
+//  //     value: JSON.stringify({
+//  //       todo: aux
+//  //     })
+//  //   })
+//  // })
+ }
+//
 
   jason(){
     this.au.contactosprueba(this.usuario.uid).subscribe(dat =>{

@@ -19,7 +19,7 @@ export class TelefonoPage implements OnInit {
   pin = 0
   cajainterna = 0
   estado = 0
-  contacts=0
+  contacts="0"
   img ='https://firebasestorage.googleapis.com/v0/b/aplicacion-bdcf5.appspot.com/o/user%2Fdefault.jpg?alt=media&token=773dd56e-f796-41a1-8a85-d40fe7a9693e'
   constructor(
     private route: Router,

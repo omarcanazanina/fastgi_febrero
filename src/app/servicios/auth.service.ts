@@ -241,7 +241,7 @@ export class AuthService {
     })
   }
   //no esta funcionando
-  crearcontel(uid: string, correo: string, password: number, nombre: string, codtel: string, telefono: string, cajainterna: number, token: string, estado: number,contacts:number,img: string) {
+  crearcontel(uid: string, correo: string, password: number, nombre: string, codtel: string, telefono: string, cajainterna: number, token: string, estado: number,contacts:string,img: string) {
     this.fire.collection('user').doc(uid).set({
       uid: uid,
       correo: correo,
@@ -979,24 +979,27 @@ takecamera(){
   //guardar contactos en text
 
   guardarcontactos(id_usuario) {
-    let options = {
-      filter: '',
-      multiple: true,
-      hasPhoneNumber: true
-    }
-    this.contactos.find(['*'], options).then((contactos: Contact[]) => {
-      const aux: any = []
-      for (let item of contactos) {
-        aux.push({'nombre': item.name.formatted , 'telefono' : this.codigo(item.phoneNumbers[0].value)})
-      }
-      this.fire.collection('/user/' + id_usuario + '/contactostext').add({
-        key: 'contactstext',
-        value: JSON.stringify({
-          todo: aux
-        })
-      })
 
-    })
+      let options = {
+        filter: '',
+        multiple: true,
+        hasPhoneNumber: true
+      }
+      this.contactos.find(['*'], options).then((contactos: Contact[]) => {
+        const aux: any = []
+        for (let item of contactos) {
+          aux.push({'nombre': item.name.formatted , 'telefono' : this.codigo(item.phoneNumbers[0].value)})
+        }
+        this.fire.collection('/user/' + id_usuario + '/contactostext').add({
+          key: 'contactstext',
+          value: JSON.stringify({
+            todo: aux
+          })
+        })
+  
+      })
+   
+
   }
 
 
