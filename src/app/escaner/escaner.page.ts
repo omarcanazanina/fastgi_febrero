@@ -38,7 +38,7 @@ export class EscanerPage implements OnInit {
   fechita: any;
   real: number;
   ruta = (['/tabs/tab2/ingresoegreso'])
-  nombrebd
+  nombrebd:string
   ngOnInit() {
     this.monto = this.activatedRoute.snapshot.paramMap.get('monto');
     this.telefono = this.activatedRoute.snapshot.paramMap.get('phoneNumber');
@@ -46,10 +46,24 @@ export class EscanerPage implements OnInit {
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
-      let a= this.au.recupera_nombre_contacto(this.telefono,this.usuario.uid).subscribe( nombredato =>{
-        this.nombrebd = nombredato[0].nombre
-        a.unsubscribe()
+
+
+      let f = this.au.contactosprueba(this.usuario.uid).subscribe(dat => {
+        const a = JSON.parse(dat[0].value)
+        const b = a.todo
+        for (let i = 0; i < b.length; i++) {
+          const element = b[i];
+          if (element.telefono == this.telefono) {
+            this.nombrebd = element.nombre
+          }
+        }
+        f.unsubscribe()
       })
+
+     //let a= this.au.recupera_nombre_contacto(this.telefono,this.usuario.uid).subscribe( nombredato =>{
+     //  this.nombrebd = nombredato[0].nombre
+     //  a.unsubscribe()
+     //})
     })
     this.au.verificausuarioexistente(this.telefono).subscribe(contelefono => {
       this.contelefono = contelefono[0]

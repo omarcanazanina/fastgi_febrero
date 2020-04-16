@@ -16,7 +16,7 @@ import { Contacts, Contact } from '@ionic-native/contacts/ngx';
 })
 
 export class Tab2Page implements OnInit {
-  controlador=0
+  //controlador=0
 
   gruponum = [7, 8, 9, 4, 5, 6, 1, 2, 3, '.', 0, 'v']
   cont1 = 0
@@ -84,17 +84,10 @@ export class Tab2Page implements OnInit {
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
-     // this.au.guardarcontactos(this.usuario.uid)
+      //alert(this.usuario.uid)
+      this.au.guardarcontactos(this.usuario.uid)
+      this.au.actualizarcontacts({ contacts: 1 }, this.usuario.uid);
       this.cerrarsesionotro()
-      //if (this.Platform.is('ios')) {
-      //  this.au.recuperaundato('AstYEx3dWlZvtLZdREpi1DhRkYj1').subscribe(usuario => {
-      //    this.usuario = usuario;
-      //    this.route.navigate(["/tabs/tab3"])
-      //  })
-      //}else{
-      //  console.log('es otro dispositivp');
-      //  
-      //}
     })
 
   }
@@ -190,14 +183,17 @@ export class Tab2Page implements OnInit {
 
   }
 
- guardarcontactos() {
-   if(parseInt(this.usuario.contacts) == 0){
+// guardarcontactos() {
+//   if(parseInt(this.usuario.contacts) == 0){
+//
+//    this.au.guardarcontactos(this.usuario.uid)
+//    this.controlador =1
+//   }else{
+//
+//   }
 
-    this.au.guardarcontactos(this.usuario.uid)
-    this.controlador =1
-   }else{
 
-   }
+
 //  // let options = {
 //  //   filter: '',
 //  //   multiple: true,
@@ -216,7 +212,7 @@ export class Tab2Page implements OnInit {
 //  //     })
 //  //   })
 //  // })
- }
+// }
 //
 
   jason(){
@@ -242,6 +238,8 @@ export class Tab2Page implements OnInit {
     })
    // this.au.deletecontact(this.usuario.uid,)
   }
+
+   
 }
 
 

@@ -70,6 +70,8 @@ export class PagarenviocobroPage implements OnInit {
   ngOnInit() {
 
     this.numero = this.activatedRoute.snapshot.paramMap.get('id')
+    console.log(this.numero);
+    
     this.nombresito = this.activatedRoute.snapshot.paramMap.get('nombre')
     //quitamos el codigo +591
     this.numerosincodigo = this.numero.replace("+591", "").trim()
@@ -78,10 +80,6 @@ export class PagarenviocobroPage implements OnInit {
       this.uu = this.au.pruebita();
       this.au.recuperaundato(this.uu).subscribe(usuario => {
         this.usuario = usuario;
-      //  let a= this.au.recupera_nombre_contacto(this.cobrador.telefono,this.usuario.uid).subscribe( nombredato =>{
-      //    this.nombrebd = nombredato[0].nombre
-      //    a.unsubscribe()
-      //  })
         this.caja = parseFloat(this.usuario.cajainterna)
         this.caja1 = this.caja.toFixed(2)
         this.au.recuperacobrostransferencias(this.cobrador.uid, this.usuario.uid).subscribe(dat => {
@@ -112,12 +110,11 @@ export class PagarenviocobroPage implements OnInit {
     if (this.pin == '' && detalle == undefined) {
       this.au.datosincorrectos()
     } else {
+
       if (detalle == undefined) {
         this.au.datosincorrectos()
-      } else {
-        let a= this.au.recupera_nombre_contacto(this.usuario.telefono,this.cobrador.uid).subscribe( nombredato =>{
-          this.nombrebd1 = nombredato[0].nombre
-        
+      }
+      else {
         this.fecha = new Date();
         const mes = this.fecha.getMonth() + 1;
         this.fechita = this.fecha.getDate() + "-" + mes + "-" + this.fecha.getFullYear() + " " + this.fecha.getHours() + ":" + this.fecha.getMinutes() + ":" + this.fecha.getSeconds();
@@ -125,7 +122,7 @@ export class PagarenviocobroPage implements OnInit {
           monto: this.pin,
           dato: 'enviado',
           clave: this.cobrador.uid,
-          formatted: this.nombrebd,
+          formatted: this.cobrador.nombre,
           telefono: this.cobrador.telefono,
           fechita: this.fechita,
           fecha: this.fecha,
@@ -137,7 +134,7 @@ export class PagarenviocobroPage implements OnInit {
           monto: this.pin,
           dato: 'recibio',
           clave: this.usuario.uid,
-          formatted: this.nombrebd1,
+          formatted: this.usuario.nombre,
           telefono: this.usuario.telefono,
           fechita: this.fechita,
           fecha: this.fecha,
@@ -145,16 +142,13 @@ export class PagarenviocobroPage implements OnInit {
           detalle: detalle,
           estado: 0
         })
-        this.au.enviocobro(this.pin, this.nombrebd)
-        this.fcm.notificacionforToken("Fastgi", "Acaba de recibir una solicitud de pago de " + this.pin + "Bs. de " + this.nombrebd1 + " ", this.cobrador.token, this.usuario.uid, "/tabs/tab2")
+        this.au.enviocobro(this.pin, this.cobrador.nombre)
+        this.fcm.notificacionforToken("Fastgi", "Acaba de recibir una solicitud de pago de " + this.pin + "Bs. de " + this.usuario.nombre + " ", this.cobrador.token, this.usuario.uid, "/tabs/tab2")
         this.monto = ''
         this.detalle = ''
-        a.unsubscribe()
-      })
+       // a.unsubscribe()
       }
     }
-    //
-
   }
   // funcion pagar deuda 
   async pagar1(usu) {
@@ -169,8 +163,8 @@ export class PagarenviocobroPage implements OnInit {
             usu_pagodeuda: usu,
             usuario_pagodeuda: this.usuario,
             cobrador_pagodeuda: this.cobrador,
-            nombreusuario:this.nombrebd1,
-            nombrecobrador:this.nombrebd
+            nombreusuario: this.nombrebd1,
+            nombrecobrador: this.nombrebd
           }
         });
         return await modal.present();
@@ -200,8 +194,8 @@ export class PagarenviocobroPage implements OnInit {
             cobrador_transferencia: this.cobrador,
             monto_transferencia: this.pin,
             detalle_transferencia: detalle,
-            name_transferencia : this.nombresito,
-            nro_transferencia : this.numero
+            name_transferencia: this.nombresito,
+            nro_transferencia: this.numero
             //name_transferencia: this.nombrebd
           }
         });

@@ -625,7 +625,7 @@ export class AuthService {
   // confirmacion de envio de cobro
   async enviocobro(monto, usu) {
     const alert = await this.alertController.create({
-      header: 'GoPay',
+      header: 'Fastgi',
       // subHeader: 'Envio Exitoso',
       message: 'Se envio la petición de pago de ' + monto + '  Bs. a ' + usu + ' exitosamente.',
       backdropDismiss: false,
