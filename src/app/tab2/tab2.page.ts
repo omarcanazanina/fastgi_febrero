@@ -65,7 +65,6 @@ export class Tab2Page implements OnInit {
     token: "",
     contacts: ""
   }
-    ;
   lista: any;
   caja: number
   caja1: any
@@ -83,11 +82,11 @@ export class Tab2Page implements OnInit {
     // }, 150)
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
-      this.usuario = usuario;
-      //alert(this.usuario.uid)
+      //this.usuario = usuario;
+      alert(JSON.stringify(this.usuario))
       this.au.guardarcontactos(this.usuario.uid)
-      this.au.actualizarcontacts({ contacts: 1 }, this.usuario.uid);
-      this.cerrarsesionotro()
+      //this.au.actualizarcontacts({ contacts: 1 }, this.usuario.uid);
+      //this.cerrarsesionotro()
     })
 
   }

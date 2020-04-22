@@ -979,7 +979,6 @@ takecamera(){
   //guardar contactos en text
 
   guardarcontactos(id_usuario) {
-
       let options = {
         filter: '',
         multiple: true,
