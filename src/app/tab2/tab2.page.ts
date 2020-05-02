@@ -16,18 +16,12 @@ import { Contacts, Contact } from '@ionic-native/contacts/ngx';
 })
 
 export class Tab2Page implements OnInit {
-  //controlador=0
-
-  gruponum = [7, 8, 9, 4, 5, 6, 1, 2, 3, '.', 0, 'v']
-  cont1 = 0
-  pin = ""
   //  @ViewChild('input', { static: true }) myInput;
   //lo nuevo
   encodeData: any;
   scannedData: {};
   barcodeScannerOptions: BarcodeScannerOptions;
   //
-  cadena = "omaro.aa"
   public data = {
     text: ""
   };
@@ -82,9 +76,11 @@ export class Tab2Page implements OnInit {
     // }, 150)
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
-      //this.usuario = usuario;
-      alert(JSON.stringify(this.usuario))
-      this.au.guardarcontactos(this.usuario.uid)
+      this.usuario = usuario;
+      this.guardarcontactos()
+      
+      //alert(JSON.stringify(this.usuario))
+      //this.au.guardarcontactos(this.usuario.uid)
       //this.au.actualizarcontacts({ contacts: 1 }, this.usuario.uid);
       //this.cerrarsesionotro()
     })
@@ -174,23 +170,22 @@ export class Tab2Page implements OnInit {
 //   }
 // }
 
-  funcion() {
-    let c = this.cadena.indexOf('.')
-    console.log(c);
-    this.separado = this.cadena.substring(c + 1, this.cadena.length)
-    console.log(this.separado);
+ //funcion() {
+ //  let c = this.cadena.indexOf('.')
+ //  console.log(c);
+ //  this.separado = this.cadena.substring(c + 1, this.cadena.length)
+ //  console.log(this.separado);
 
-  }
+ //}
 
-// guardarcontactos() {
-//   if(parseInt(this.usuario.contacts) == 0){
+   guardarcontactos() {
+     if(parseInt(this.usuario.contacts) == 0){
+      this.au.guardarcontactos(this.usuario.uid)
+      this.au.actualizarcontacts({ contacts: 1 }, this.usuario.uid);
+     }else{
 //
-//    this.au.guardarcontactos(this.usuario.uid)
-//    this.controlador =1
-//   }else{
-//
-//   }
-
+     }
+    }
 
 
 //  // let options = {

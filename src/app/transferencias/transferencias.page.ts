@@ -23,7 +23,7 @@ export class TransferenciasPage implements OnInit {
 
   contactstext = []
   contactstexttrue = []
-  contactstextnone = [] 
+  contactstextnone = []
   //
   constructor(private au: AuthService,
     public loadingController: LoadingController,
@@ -79,6 +79,7 @@ export class TransferenciasPage implements OnInit {
   }
 
   listarcontactos() {
+    let load = this.au.loadinginicio();
     this.au.contactosprueba(this.usuario.uid).subscribe(dat => {
       const a = JSON.parse(dat[0].value)
       this.contactstext = a.todo
@@ -93,9 +94,13 @@ export class TransferenciasPage implements OnInit {
         })
       });
     })
+    load.then(loading => {
+      loading.dismiss()
+    })
   }
 
   updatecontacts() {
+    let load = this.au.loadinginicio();
     this.au.contactosprueba(this.usuario.uid).subscribe(res => {
       const contact = res[0].id
       this.au.deletecontact(this.usuario.uid, contact).then(dat => {
@@ -104,6 +109,8 @@ export class TransferenciasPage implements OnInit {
         this.route.navigate(['/tabs/historial'])
       })
     })
-
+    load.then(loading => {
+      loading.dismiss()
+    })
   }
 }

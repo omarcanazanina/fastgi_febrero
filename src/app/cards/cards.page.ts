@@ -41,31 +41,34 @@ export class CardsPage implements OnInit {
   fechita: any;
   real: number
   ruta = (['/tabs/tab2/ingresoegreso'])
-  nombrebd: string
+  //ahora para nombres correctos
+  cobrador :any =[]
+  nombrecob: string
   ngOnInit() {
     this.telefono = this.activatedRoute.snapshot.paramMap.get('phoneNumber');
-
+    //alert(this.telefono)
     this.real = parseFloat(this.monto)
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
-
       let f = this.au.contactosprueba(this.usuario.uid).subscribe(dat => {
         const a = JSON.parse(dat[0].value)
         const b = a.todo
         for (let i = 0; i < b.length; i++) {
           const element = b[i];
           if (element.telefono == this.telefono) {
-            this.nombrebd = element.nombre
+            this.nombrecob = element.nombre
           }
         }
         f.unsubscribe()
       })
+      //this.au.verificausuarioActivo(this.numerosincodigo).subscribe(cont => {
+      //  this.cobrador = cont[0]
+      //})
     })
     this.au.verificausuarioexistente(this.telefono).subscribe(contelefono => {
       this.contelefono = contelefono[0]
     })
-
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
     this.fechita = this.fecha.getDate() + "-" + mes + "-" + this.fecha.getFullYear() + " " + this.fecha.getHours() + ":" + this.fecha.getMinutes() + ":" + this.fecha.getSeconds();
@@ -80,10 +83,11 @@ export class CardsPage implements OnInit {
           component: Confirmacion1Page,
           //cssClass: 'detalleenviocobro',
           componentProps: {
-            usuario_sinmonto: this.usuario,
-            contelefono_sinmonto: this.contelefono,
+            usuario: this.usuario,
+            cobrador: this.contelefono,
             monto_sinmonto: monto,
-            name_sinmonto:this.nombrebd
+           // name_sinmonto: this.nombrecob,
+            nrocontrol : 3
           }
         }).then((modal) => modal.present())
       } else {

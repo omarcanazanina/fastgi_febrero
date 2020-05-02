@@ -51,7 +51,7 @@ export class HistorialPage implements OnInit {
       this.usuario = usuario;
       this.idusuario = this.usuario.uid
 
-      this.au.ordenarcobrostransferencias(this.usuario.uid).subscribe(info => {
+     let lis = this.au.ordenarcobrostransferencias(this.usuario.uid).subscribe(info => {
         this.historial = info.filter((valor, indiceActual, arreglo) => arreglo.findIndex((item) => item.telefono === valor.telefono
         ) === indiceActual);
         console.log(this.historial);
@@ -59,6 +59,7 @@ export class HistorialPage implements OnInit {
         if (this.historial.length > 0)
           this.c = 1
         this.importarcontactos()
+        lis.unsubscribe()
       })
     })
 

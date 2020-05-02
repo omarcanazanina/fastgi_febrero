@@ -83,10 +83,11 @@ export class EscanerPage implements OnInit {
           component: Confirmacion1Page,
           //cssClass: 'detalleenviocobro',
           componentProps: {
-            usuario_conmonto: this.usuario,
-            contelefono_conmonto: this.contelefono,
+            usuario: this.usuario,
+            cobrador: this.contelefono,
             monto_conmonto: monto,
-            name_conmonto: this.nombrebd
+            nrocontrol: 4
+           // name_conmonto: this.nombrebd
           }
         }).then((modal) => modal.present())
       } else {

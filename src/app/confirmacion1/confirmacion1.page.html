@@ -6,13 +6,13 @@
   </ion-header>
   <ion-card color="success" class="contenedor" (click)="label()">
     <!-- <ion-label slot="end" class="text" (click)="closeUsuario()">Cancelar</ion-label> -->
-    <h4 class="text" text-center *ngIf="usuario_transferencia != ''">Monto a transferir: {{monto_transferencia}} Bs. a
-      {{name_transferencia}}</h4>
-    <h4 class="text" text-center *ngIf="usuario_conmonto != ''">Se pagara: {{monto_conmonto}} a
-      {{name_conmonto}}</h4>
-    <h4 class="text" text-center *ngIf="usuario_sinmonto != ''">Se pagara: {{monto_sinmonto}} Bs. a
-      {{name_sinmonto}} a</h4>
-    <h4 class="text" text-center *ngIf="usuario_pagodeuda != ''">Monto a pagar: {{usu_pagodeuda.monto}} Bs.</h4>
+    <h4 class="text" text-center *ngIf="nrocontrol == 1 ">Monto a transferir: {{monto_transferencia}} Bs. a
+      {{nombrecob}}</h4>
+    <h4 class="text" text-center *ngIf="nrocontrol == 4">Se pagara: {{monto_conmonto}} a
+      {{nombrecob}}</h4>
+    <h4 class="text" text-center *ngIf="nrocontrol == 3">Se pagara: {{monto_sinmonto}} Bs. a
+      {{nombrecob}} </h4>
+    <h4 class="text" text-center *ngIf="nrocontrol == 2 ">Monto a pagar: {{usu_pagodeuda.monto}} Bs. a {{nombrecob}}</h4>
 
     <div *ngIf="pin == '' && controladorteclado == 1">
       <ion-item class="pin">

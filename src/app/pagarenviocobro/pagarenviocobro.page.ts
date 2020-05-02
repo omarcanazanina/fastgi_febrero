@@ -48,6 +48,11 @@ export class PagarenviocobroPage implements OnInit {
   controldecimal
   nombrebd
   nombrebd1
+
+
+  // nombres para notificaciones 
+  nombreusu
+  nombrecob
   constructor(private activatedRoute: ActivatedRoute,
     private au: AuthService,
     public alertController: AlertController,
@@ -70,13 +75,13 @@ export class PagarenviocobroPage implements OnInit {
   ngOnInit() {
 
     this.numero = this.activatedRoute.snapshot.paramMap.get('id')
-    console.log(this.numero);
-    
     this.nombresito = this.activatedRoute.snapshot.paramMap.get('nombre')
     //quitamos el codigo +591
     this.numerosincodigo = this.numero.replace("+591", "").trim()
     this.au.verificausuarioActivo(this.numerosincodigo).subscribe(cont => {
       this.cobrador = cont[0]
+      console.log(this.cobrador);
+
       this.uu = this.au.pruebita();
       this.au.recuperaundato(this.uu).subscribe(usuario => {
         this.usuario = usuario;
@@ -110,7 +115,6 @@ export class PagarenviocobroPage implements OnInit {
     if (this.pin == '' && detalle == undefined) {
       this.au.datosincorrectos()
     } else {
-
       if (detalle == undefined) {
         this.au.datosincorrectos()
       }
@@ -118,35 +122,57 @@ export class PagarenviocobroPage implements OnInit {
         this.fecha = new Date();
         const mes = this.fecha.getMonth() + 1;
         this.fechita = this.fecha.getDate() + "-" + mes + "-" + this.fecha.getFullYear() + " " + this.fecha.getHours() + ":" + this.fecha.getMinutes() + ":" + this.fecha.getSeconds();
-        this.fire.collection('/user/' + this.usuario.uid + '/cobrostransferencias').add({
-          monto: this.pin,
-          dato: 'enviado',
-          clave: this.cobrador.uid,
-          formatted: this.cobrador.nombre,
-          telefono: this.cobrador.telefono,
-          fechita: this.fechita,
-          fecha: this.fecha,
-          fechapago: '',
-          detalle: detalle,
-          estado: 0
+        let cb = this.au.contactosprueba(this.usuario.uid).subscribe(dat => {
+          const a = JSON.parse(dat[0].value)
+          const b = a.todo
+          for (let i = 0; i < b.length; i++) {
+            const element = b[i];
+            if (element.telefono == this.cobrador.telefono) {
+              this.nombrecob = element.nombre
+              console.log("el cobrador " + this.nombrecob)
+            }
+          }
+          this.au.contactosprueba(this.cobrador.uid).subscribe(dat => {
+            const a = JSON.parse(dat[0].value)
+            const b = a.todo
+            for (let i = 0; i < b.length; i++) {
+              const element = b[i];
+              if (element.telefono == this.usuario.telefono) {
+                this.nombreusu = element.nombre
+                console.log('el usuario' + this.nombreusu);
+              }
+            }
+            this.fire.collection('/user/' + this.usuario.uid + '/cobrostransferencias').add({
+              monto: this.pin,
+              dato: 'enviado',
+              clave: this.cobrador.uid,
+              formatted: this.nombrecob,
+              telefono: this.cobrador.telefono,
+              fechita: this.fechita,
+              fecha: this.fecha,
+              fechapago: '',
+              detalle: detalle,
+              estado: 0
+            })
+            this.fire.collection('/user/' + this.cobrador.uid + '/cobrostransferencias').add({
+              monto: this.pin,
+              dato: 'recibio',
+              clave: this.usuario.uid,
+              formatted: this.nombreusu,
+              telefono: this.usuario.telefono,
+              fechita: this.fechita,
+              fecha: this.fecha,
+              fechapago: '',
+              detalle: detalle,
+              estado: 0
+            })
+            this.au.enviocobro(this.pin, this.nombrecob)
+            this.fcm.notificacionforToken("Fastgi", "Acaba de recibir una solicitud de pago de " + this.pin + "Bs. de " + this.nombreusu + " ", this.cobrador.token, this.usuario.uid, "/tabs/tab2")
+            this.monto = ''
+            this.detalle = ''
+             cb.unsubscribe()
+          })
         })
-        this.fire.collection('/user/' + this.cobrador.uid + '/cobrostransferencias').add({
-          monto: this.pin,
-          dato: 'recibio',
-          clave: this.usuario.uid,
-          formatted: this.usuario.nombre,
-          telefono: this.usuario.telefono,
-          fechita: this.fechita,
-          fecha: this.fecha,
-          fechapago: '',
-          detalle: detalle,
-          estado: 0
-        })
-        this.au.enviocobro(this.pin, this.cobrador.nombre)
-        this.fcm.notificacionforToken("Fastgi", "Acaba de recibir una solicitud de pago de " + this.pin + "Bs. de " + this.usuario.nombre + " ", this.cobrador.token, this.usuario.uid, "/tabs/tab2")
-        this.monto = ''
-        this.detalle = ''
-       // a.unsubscribe()
       }
     }
   }
@@ -161,10 +187,11 @@ export class PagarenviocobroPage implements OnInit {
           // cssClass: 'confirmarpago',
           componentProps: {
             usu_pagodeuda: usu,
-            usuario_pagodeuda: this.usuario,
-            cobrador_pagodeuda: this.cobrador,
+            usuario: this.usuario,
+            cobrador: this.cobrador,
             nombreusuario: this.nombrebd1,
-            nombrecobrador: this.nombrebd
+            nombrecobrador: this.nombrebd,
+            nrocontrol: 2
           }
         });
         return await modal.present();
@@ -175,13 +202,6 @@ export class PagarenviocobroPage implements OnInit {
   }
   // funcion hacer transferencia
   async confirmacion1(detalle) {
-    // let c = this.pin.indexOf('.')
-    // console.log(c);
-    // this.controldecimal=this.pin.substring(c +1,this.pin.length)
-    // console.log(this.controldecimal);
-    // if(this.control){
-
-    // }
     if (parseInt(this.usuario.password) == 0) {
       this.au.enviocorreo1(this.usuario.uid, this.usuario.telefono)
     } else {
@@ -190,13 +210,14 @@ export class PagarenviocobroPage implements OnInit {
           component: Confirmacion1Page,
           cssClass: 'confirmacion1',
           componentProps: {
-            usuario_transferencia: this.usuario,
-            cobrador_transferencia: this.cobrador,
+            usuario: this.usuario,
+            cobrador: this.cobrador,
             monto_transferencia: this.pin,
             detalle_transferencia: detalle,
             name_transferencia: this.nombresito,
-            nro_transferencia: this.numero
-            //name_transferencia: this.nombrebd
+            nro_transferencia: this.numero,
+            //prueba para controlar
+            nrocontrol : 1
           }
         });
         modal.present();
@@ -247,6 +268,10 @@ export class PagarenviocobroPage implements OnInit {
       this.myInput.setFocus();
     }, 150)
     this.controladorteclado = 0
+  }
+
+  retornar(){
+    this.route.navigate(['/tabs/historial'])
   }
 
 }

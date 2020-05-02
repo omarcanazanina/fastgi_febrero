@@ -56,6 +56,10 @@ export class Tab4Page implements OnInit {
           this.egreso1 = this.egreso.toFixed(2)
         });
         this.balance = this.ingreso - this.egreso
+        console.log('este es el ingreso'+this.ingreso);
+        console.log('este es el egreso' + this.egreso);
+        
+        
         this.balance1 = this.balance.toFixed(2)
       }) 
     })
